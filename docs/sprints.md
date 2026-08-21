@@ -32,7 +32,7 @@ Construct reusable dumb UI components and the persistent application frame (Head
   - `src/app/shared/ui/button/button.component.ts`: Action Blue & Dark Surface button variants with focus states.
   - `src/app/shared/ui/badge/badge.component.ts`: Status and category chips.
   - `src/app/shared/ui/input/input.component.ts`: High-contrast form controls with floating or standard labels.
-- [ ] **1.2 Global Sticky Header**
+- [x] **1.2 Global Sticky Header**
   - Create `src/app/shared/layout/header/header.component.ts` with `#101010` background.
   - Brand Logo anchor with high-contrast SVG / typography.
   - Expanding functional Search Bar with real-time query signal binding.
