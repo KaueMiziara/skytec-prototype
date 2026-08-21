@@ -140,7 +140,7 @@ Construct the technical, anti-vibe product page with buy box, specifications tab
 
 Build the minimalist, distraction-free account access interface.
 
-- [ ] **6.1 Auth Card & Tabs Component**
+- [x] **6.1 Auth Card & Tabs Component**
   - Create `src/app/features/auth/auth.component.ts`.
   - Centered `#FFFFFF` card on `#f5f5f7` background.
   - H1: "Minha conta SKYTEC" with toggle tabs: "Entrar" and "Cadastrar".
