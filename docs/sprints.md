@@ -129,7 +129,7 @@ Construct the technical, anti-vibe product page with buy box, specifications tab
 - [x] **5.3 Specifications Table Component**
   - Create `src/app/features/catalog/pages/product-detail/components/pdp-specs-table/pdp-specs-table.component.ts`.
   - Full-width HTML table with subtle `border-gray-200` and alternating zebra striping (`#FFFFFF` / `#f5f5f7`).
-- [ ] **5.4 Related Products Recommendation Strip**
+- [x] **5.4 Related Products Recommendation Strip**
   - Horizontal grid of related machines filtered by category/brand.
 - [ ] **5.5 PDP Container Assembly**
   - Assemble `src/app/features/catalog/pages/product-detail/product-detail.component.ts` reading `:id` route parameter via `withComponentInputBinding()`.
