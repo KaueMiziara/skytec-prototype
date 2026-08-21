@@ -131,4 +131,20 @@ describe('AdminComponent', () => {
     expect(backToStoreLink).toBeTruthy();
     expect(backToStoreLink.textContent).toContain('Voltar para a Loja');
   });
+
+  it('should render admin product table when products tab is active', () => {
+    const productTable = fixture.nativeElement.querySelector('app-admin-product-table');
+    expect(productTable).toBeTruthy();
+  });
+
+  it('should call deleteProduct on ProductService when handleDeleteProduct is invoked', () => {
+    const initialCount = productService.products().length;
+    const firstProduct = productService.products()[0];
+
+    component.handleDeleteProduct(firstProduct.id);
+    fixture.detectChanges();
+
+    expect(productService.products().length).toBe(initialCount - 1);
+    expect(productService.getProductById(firstProduct.id)).toBeUndefined();
+  });
 });

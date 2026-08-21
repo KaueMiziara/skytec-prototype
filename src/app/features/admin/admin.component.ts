@@ -8,14 +8,16 @@ import {
   signal
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Product } from '../../core/models/product.model';
 import { AuthService } from '../../core/services/auth.service';
 import { ProductService } from '../../core/services/product.service';
+import { AdminProductTableComponent } from './components/admin-product-table/admin-product-table.component';
 
 export type AdminTab = 'products' | 'orders' | 'customers' | 'settings';
 
 @Component({
   selector: 'app-admin',
-  imports: [RouterLink],
+  imports: [RouterLink, AdminProductTableComponent],
   template: `
     <div class="min-h-[calc(100vh-4rem)] bg-[#f5f5f7] text-neutral-900 flex flex-col lg:flex-row">
       <header class="lg:hidden bg-[#101010] text-white px-4 py-3 border-b border-neutral-800 flex items-center justify-between">
@@ -394,58 +396,14 @@ export type AdminTab = 'products' | 'orders' | 'customers' | 'settings';
 
         @switch (activeTab()) {
           @case ('products') {
-            <section aria-label="Painel de Produtos" class="space-y-4">
-              <div class="bg-white border border-neutral-200 rounded-xl p-6 shadow-2xs space-y-4">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-100 pb-4">
-                  <div>
-                    <h2 class="text-lg font-bold text-neutral-900">Catálogo de Produtos em Memória</h2>
-                    <p class="text-xs text-neutral-500 mt-0.5">
-                      Visualização de dados brutos e controle de estoque do protótipo interativo.
-                    </p>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <a
-                      routerLink="/catalogo"
-                      class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg bg-neutral-100 hover:bg-neutral-200 text-neutral-800 transition-colors border border-neutral-200"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-                      <span>Ver Catálogo Público</span>
-                    </a>
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <div class="p-3.5 bg-[#f5f5f7] rounded-lg border border-neutral-200/80">
-                    <span class="text-xs text-neutral-500 font-medium block">Total de Máquinas</span>
-                    <span class="text-2xl font-black text-neutral-900 font-mono mt-0.5 block">
-                      {{ productService.products().length }}
-                    </span>
-                  </div>
-                  <div class="p-3.5 bg-[#f5f5f7] rounded-lg border border-neutral-200/80">
-                    <span class="text-xs text-neutral-500 font-medium block">Categorias Mapeadas</span>
-                    <span class="text-2xl font-black text-neutral-900 font-mono mt-0.5 block">
-                      {{ productService.categories().length }}
-                    </span>
-                  </div>
-                  <div class="p-3.5 bg-[#f5f5f7] rounded-lg border border-neutral-200/80">
-                    <span class="text-xs text-neutral-500 font-medium block">Marcas Parceiras</span>
-                    <span class="text-2xl font-black text-neutral-900 font-mono mt-0.5 block">
-                      {{ productService.brands().length }}
-                    </span>
-                  </div>
-                </div>
-
-                <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg text-xs text-blue-900 flex items-start gap-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-blue-700 shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
-                  <div>
-                    <span class="font-bold block">Tabela de Dados em Alta Densidade (Sprint 7.2)</span>
-                    <span class="text-blue-800 block mt-0.5">
-                      A tabela completa de produtos com busca, ordenação de colunas e ações rápidas (Editar/Excluir) será carregada nesta seção.
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </section>
+            <app-admin-product-table
+              [products]="productService.products()"
+              [brands]="productService.brands()"
+              [categories]="productService.categories()"
+              (edit)="handleEditProduct($event)"
+              (delete)="handleDeleteProduct($event)"
+              (create)="handleCreateProduct()"
+            />
           }
 
           @case ('orders') {
@@ -608,5 +566,13 @@ export class AdminComponent {
   closeMobileSidebar(): void {
     this.isMobileSidebarOpen.set(false);
   }
+
+  handleEditProduct(product: Product): void {}
+
+  handleDeleteProduct(productId: string): void {
+    this.productService.deleteProduct(productId);
+  }
+
+  handleCreateProduct(): void {}
 }
 

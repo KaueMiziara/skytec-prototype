@@ -160,7 +160,7 @@ Implement the data-dense, utilitarian management interface for B2B operations.
 - [x] **7.1 Admin Layout & Sidebar**
   - Create `src/app/features/admin/admin.component.ts` with `#101010` fixed sidebar.
   - Navigation links: Products, Orders, Customers, Settings.
-- [ ] **7.2 Products Data Table**
+- [x] **7.2 Products Data Table**
   - Create `src/app/features/admin/components/admin-product-table/admin-product-table.component.ts`.
   - High data-density table with SKU, Name, Brand, Category, Price, and Quick Actions (Edit/Delete).
   - Search and column sorting.
