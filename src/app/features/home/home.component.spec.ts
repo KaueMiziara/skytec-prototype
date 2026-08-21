@@ -47,4 +47,9 @@ describe('HomeComponent', () => {
     const mediaElement = fixture.nativeElement.querySelector('app-media-section');
     expect(mediaElement).toBeTruthy();
   });
+
+  it('should render app-institutional-snippet component', () => {
+    const snippetElement = fixture.nativeElement.querySelector('app-institutional-snippet');
+    expect(snippetElement).toBeTruthy();
+  });
 });

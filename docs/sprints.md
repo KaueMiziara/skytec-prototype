@@ -72,7 +72,7 @@ Implement the high-conversion, utilitarian B2B landing page using copy and desig
 - [x] **2.5 Machinery in Action (Media / Shorts)**
   - Create `src/app/features/home/components/media-section/media-section.component.ts`.
   - Utilitarian 16:9 / 9:16 responsive video placeholders with lazy iframe loading.
-- [ ] **2.6 Institutional Snippet**
+- [x] **2.6 Institutional Snippet**
   - Create `src/app/features/home/components/institutional-snippet/institutional-snippet.component.ts`.
   - Concise company intro paragraph with link to the full "Sobre Nós" page.
 - [ ] **2.7 Home View Assembly**

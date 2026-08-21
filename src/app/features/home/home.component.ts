@@ -4,6 +4,7 @@ import { FlagshipBannerComponent } from './components/flagship-banner/flagship-b
 import { BrandCarouselComponent } from './components/brand-carousel/brand-carousel.component';
 import { FeaturedProductsComponent } from './components/featured-products/featured-products.component';
 import { MediaSectionComponent } from './components/media-section/media-section.component';
+import { InstitutionalSnippetComponent } from './components/institutional-snippet/institutional-snippet.component';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,8 @@ import { MediaSectionComponent } from './components/media-section/media-section.
     FlagshipBannerComponent,
     BrandCarouselComponent,
     FeaturedProductsComponent,
-    MediaSectionComponent
+    MediaSectionComponent,
+    InstitutionalSnippetComponent
   ],
   template: `
     <main class="min-h-screen">
@@ -21,6 +23,7 @@ import { MediaSectionComponent } from './components/media-section/media-section.
       <app-brand-carousel />
       <app-featured-products />
       <app-media-section />
+      <app-institutional-snippet />
     </main>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
