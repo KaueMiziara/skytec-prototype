@@ -19,7 +19,7 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render header, main container with router outlet, and footer', () => {
+  it('should render header, main container with router outlet, footer, and cart drawer', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
 
@@ -27,5 +27,6 @@ describe('App', () => {
     expect(compiled.querySelector('app-header')).not.toBeNull();
     expect(compiled.querySelector('main')).not.toBeNull();
     expect(compiled.querySelector('app-footer')).not.toBeNull();
+    expect(compiled.querySelector('app-cart-drawer')).not.toBeNull();
   });
 });

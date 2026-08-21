@@ -175,7 +175,7 @@ Implement the data-dense, utilitarian management interface for B2B operations.
 
 Complete the checkout flow, lead generation, and accessibility verification.
 
-- [ ] **8.1 Slide-over Cart Drawer**
+- [x] **8.1 Slide-over Cart Drawer**
   - Create `src/app/shared/layout/cart-drawer/cart-drawer.component.ts`.
   - Item list, quantity increment/decrement, subtotal calculation, and remove action.
 - [ ] **8.2 WhatsApp B2B Quote Integration**
