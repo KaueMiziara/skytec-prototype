@@ -107,7 +107,7 @@ Build the reactive B2B catalog with zero-latency instant filtering and search.
   - Checkbox groups for Brands and Categories/Stitch Types.
   - Reactive price range slider (min/max bounds computed from data).
   - Mobile bottom-sheet / off-canvas filter drawer with active filter badges and clear button.
-- [ ] **4.3 Catalog State & Search Coordination**
+- [x] **4.3 Catalog State & Search Coordination**
   - Create `src/app/features/catalog/services/catalog-state.service.ts` or coordinate via `ProductService`.
   - Computed reactive signal for filtered & sorted products with zero page reloads.
 - [ ] **4.4 Catalog Page Container**

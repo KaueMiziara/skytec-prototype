@@ -49,6 +49,15 @@ export interface ProductFilterState {
   sortBy: ProductSortOption;
 }
 
+export const DEFAULT_FILTER_STATE: ProductFilterState = {
+  query: '',
+  brands: [],
+  categories: [],
+  minPrice: null,
+  maxPrice: null,
+  sortBy: 'price-asc'
+};
+
 export interface ProductsData {
   products: Product[];
 }
