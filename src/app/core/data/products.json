@@ -1,0 +1,55 @@
+{
+  "products": [
+    {
+      "id": "PROD-JACK-A2C",
+      "sku": "A2C-JACK",
+      "name": "Máquina de Costura Industrial Reta com Corte de Linha Jack A2C",
+      "brand": "Jack",
+      "category": "Reta",
+      "price": 3150.0,
+      "images": ["/assets/mock/jack-a2c.jpg"],
+      "shortDescription": "Máquina reta industrial com corte de linha automático, ideal para alta produtividade.",
+      "differentials": [
+        "Corte de linha automático",
+        "Motor Direct Drive integrado"
+      ],
+      "specifications": {
+        "Tipo de Máquina": "Reta Industrial",
+        "Voltagem": "220V"
+      }
+    },
+    {
+      "id": "PROD-SUN-SS65D",
+      "sku": "SS65D-220V",
+      "name": "Máquina Costura Industrial Overlock Direct Drive Sun Special SS65D (220V)",
+      "brand": "Sun Special",
+      "category": "Overlock",
+      "price": 3600.0,
+      "images": ["/assets/mock/sun-ss65d.jpg"],
+      "shortDescription": "Projetada para oferecer acabamento rápido e limpo em tecidos leves e médios.",
+      "differentials": [
+        "Motor Direct Drive Integrado: Menos ruído e menor consumo de energia.",
+        "Versatilidade: Ajuste fácil para diferentes espessuras de tecido.",
+        "Lubrificação Automática: Maior durabilidade dos componentes."
+      ],
+      "specifications": {
+        "Tipo de Máquina": "Overlock Industrial",
+        "Aplicação": "Tecidos leves e médios",
+        "Tipo de Motor": "Direct Drive integrado",
+        "Potência": "550W",
+        "Nº de Agulhas": "1",
+        "Nº de Fios": "3",
+        "Nº de Loopers": "2",
+        "Tipo de Agulha": "DCx27",
+        "Largura do Chuleado": "4 mm",
+        "Comprimento do Ponto": "0,5 a 3,8 mm",
+        "Altura do Calcador": "5,5 mm",
+        "Velocidade Máxima": "6.000 rpm",
+        "Sistema de Lubrificação": "Automático",
+        "Iluminação": "LED embutido",
+        "Control Box": "Acoplado ao cabeçote",
+        "Voltagem": "220V"
+      }
+    }
+  ]
+}
