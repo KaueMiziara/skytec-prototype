@@ -8,7 +8,7 @@ This roadmap outlines the atomic, step-by-step implementation plan for the **Sky
 
 Establish the data contracts, state services, and foundational routing configuration.
 
-- [ ] **0.1 Domain Models & Interfaces**
+- [x] **0.1 Domain Models & Interfaces**
   - Create `src/app/core/models/product.model.ts` with strict TypeScript interfaces matching `products.json` (`Product`, `ProductSpecification`, `ProductFilterState`, `Category`, `Brand`).
   - Create `src/app/core/models/cart.model.ts` for cart items, quantities, and totals.
   - Create `src/app/core/models/user.model.ts` for mock authentication state.
