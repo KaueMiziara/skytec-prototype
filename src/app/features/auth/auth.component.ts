@@ -6,12 +6,14 @@ import {
   signal
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { LoginCredentials } from '../../core/models/user.model';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 
 export type AuthTab = 'login' | 'register';
 
 @Component({
   selector: 'app-auth',
-  imports: [RouterLink],
+  imports: [RouterLink, LoginFormComponent],
   template: `
     <main class="min-h-screen bg-[#f5f5f7] text-neutral-900 pb-16 sm:pb-24">
       <nav aria-label="Navegação Estrutural" class="bg-white border-b border-neutral-200">
@@ -108,10 +110,12 @@ export type AuthTab = 'login' | 'register';
               tabindex="0"
               class="focus:outline-none"
             >
-              <div class="text-center py-6 text-neutral-600 text-sm">
-                <p class="font-medium text-neutral-900 mb-1">Acesso à conta</p>
-                <p class="text-xs text-neutral-500">Informe suas credenciais para continuar.</p>
-              </div>
+              <app-login-form
+                [loading]="isLoading()"
+                [errorMessage]="authError()"
+                (loginSubmit)="handleLogin($event)"
+                (switchToRegister)="setTab('register')"
+              />
             </div>
           } @else {
             <div
@@ -136,6 +140,8 @@ export type AuthTab = 'login' | 'register';
 export class AuthComponent {
   readonly tab = input<string | undefined>(undefined);
   readonly activeTab = signal<AuthTab>('login');
+  readonly isLoading = signal<boolean>(false);
+  readonly authError = signal<string | null>(null);
 
   constructor() {
     effect(() => {
@@ -172,6 +178,10 @@ export class AuthComponent {
       this.setTab('register');
       this.focusTab('register');
     }
+  }
+
+  handleLogin(credentials: LoginCredentials): void {
+    this.authError.set(null);
   }
 
   private focusTab(tab: AuthTab): void {

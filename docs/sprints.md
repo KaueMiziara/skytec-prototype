@@ -144,7 +144,7 @@ Build the minimalist, distraction-free account access interface.
   - Create `src/app/features/auth/auth.component.ts`.
   - Centered `#FFFFFF` card on `#f5f5f7` background.
   - H1: "Minha conta SKYTEC" with toggle tabs: "Entrar" and "Cadastrar".
-- [ ] **6.2 Login Reactive Form**
+- [x] **6.2 Login Reactive Form**
   - Email and password inputs with strict validation and error states.
 - [ ] **6.3 Register Reactive Form**
   - Name, CNPJ/CPF, Email, Phone/WhatsApp, and password fields.
