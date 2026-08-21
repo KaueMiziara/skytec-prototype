@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { AboutComponent } from './about.component';
+import { CartService } from '../../core/services/cart.service';
 
 describe('AboutComponent', () => {
   let component: AboutComponent;
@@ -9,7 +10,7 @@ describe('AboutComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AboutComponent],
-      providers: [provideRouter([])]
+      providers: [provideRouter([]), CartService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AboutComponent);
@@ -43,5 +44,40 @@ describe('AboutComponent', () => {
   it('should constrain the content area within a max-w-prose container', () => {
     const proseContainer = fixture.nativeElement.querySelector('section.max-w-prose');
     expect(proseContainer).toBeTruthy();
+  });
+
+  it('should render Block 1: Sua Jornada na Costura Começa Aqui', () => {
+    const text = fixture.nativeElement.textContent;
+    expect(text).toContain('Sua Jornada na Costura Começa Aqui');
+    expect(text).toContain('Seja você um profissional experiente ou iniciante');
+    expect(text).toContain('desde pequenos ateliês até confecções de grande porte');
+  });
+
+  it('should render Block 2: Soluções Completas em Maquinário with catalog link', () => {
+    const text = fixture.nativeElement.textContent;
+    expect(text).toContain('Soluções Completas em Maquinário');
+    expect(text).toContain('Nosso catálogo reúne máquinas domésticas e modelos industriais');
+    expect(text).toContain('algodão, malha, moletom, jeans e materiais pesados');
+
+    const catalogLink = fixture.nativeElement.querySelector('a[routerLink="/catalogo"]') as HTMLAnchorElement;
+    expect(catalogLink).toBeTruthy();
+    expect(catalogLink.textContent).toContain('Ver Catálogo de Máquinas');
+  });
+
+  it('should render Block 3: Linhas e Aviamentos', () => {
+    const text = fixture.nativeElement.textContent;
+    expect(text).toContain('Linhas e Aviamentos');
+    expect(text).toContain('O bom acabamento depende dos insumos corretos');
+    expect(text).toContain('linhas em diversas espessuras, botões, zíperes e elásticos');
+  });
+
+  it('should render Block 4: Por que escolher a SKYTEC with WhatsApp CTA link', () => {
+    const text = fixture.nativeElement.textContent;
+    expect(text).toContain('Por que escolher a SKYTEC?');
+    expect(text).toContain('Trabalhamos para ser parceiros de longo prazo da sua empresa');
+
+    const whatsappCta = fixture.nativeElement.querySelector('a[href*="wa.me"]') as HTMLAnchorElement;
+    expect(whatsappCta).toBeTruthy();
+    expect(whatsappCta.textContent).toContain('Fale com um Consultor');
   });
 });

@@ -87,7 +87,7 @@ Build the single-column, content-dense institutional storytelling page adhering 
 - [x] **3.1 Institutional Layout & Container**
   - Create `src/app/features/about/about.component.ts`.
   - Apply `max-w-prose mx-auto` container with high-contrast typography.
-- [ ] **3.2 Content Blocks Implementation**
+- [x] **3.2 Content Blocks Implementation**
   - Block 1: "Sua Jornada na Costura Começa Aqui" with right-aligned facility/store visual.
   - Block 2: "Soluções Completas em Maquinário" with left-aligned macro needle/feed dog visual.
   - Block 3: "Linhas e Aviamentos" with right-aligned thread/supplies visual.
