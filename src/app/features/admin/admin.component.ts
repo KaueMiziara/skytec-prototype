@@ -8,9 +8,14 @@ import {
   signal
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CustomerStatus } from '../../core/models/customer.model';
+import { OrderStatus } from '../../core/models/order.model';
 import { Product } from '../../core/models/product.model';
+import { AdminDataService } from '../../core/services/admin-data.service';
 import { AuthService } from '../../core/services/auth.service';
 import { ProductService } from '../../core/services/product.service';
+import { AdminCustomersTableComponent } from './components/admin-customers-table/admin-customers-table.component';
+import { AdminOrdersTableComponent } from './components/admin-orders-table/admin-orders-table.component';
 import { AdminProductModalComponent } from './components/admin-product-modal/admin-product-modal.component';
 import { AdminProductTableComponent } from './components/admin-product-table/admin-product-table.component';
 
@@ -18,7 +23,13 @@ export type AdminTab = 'products' | 'orders' | 'customers' | 'settings';
 
 @Component({
   selector: 'app-admin',
-  imports: [RouterLink, AdminProductTableComponent, AdminProductModalComponent],
+  imports: [
+    RouterLink,
+    AdminProductTableComponent,
+    AdminProductModalComponent,
+    AdminOrdersTableComponent,
+    AdminCustomersTableComponent
+  ],
   template: `
     <div class="min-h-[calc(100vh-4rem)] bg-[#f5f5f7] text-neutral-900 flex flex-col lg:flex-row">
       <header class="lg:hidden bg-[#101010] text-white px-4 py-3 border-b border-neutral-800 flex items-center justify-between">
@@ -227,7 +238,7 @@ export type AdminTab = 'products' | 'orders' | 'customers' | 'settings';
               [class.bg-neutral-800]="activeTab() !== 'orders'"
               [class.text-amber-400]="activeTab() !== 'orders'"
             >
-              Novo
+              {{ adminDataService.pendingOrdersCount() }} pendentes
             </span>
           </button>
 
@@ -272,7 +283,7 @@ export type AdminTab = 'products' | 'orders' | 'customers' | 'settings';
               [class.bg-neutral-800]="activeTab() !== 'customers'"
               [class.text-neutral-300]="activeTab() !== 'customers'"
             >
-              12
+              {{ adminDataService.customers().length }}
             </span>
           </button>
 
@@ -408,59 +419,19 @@ export type AdminTab = 'products' | 'orders' | 'customers' | 'settings';
           }
 
           @case ('orders') {
-            <section aria-label="Painel de Cotações e Pedidos" class="space-y-4">
-              <div class="bg-white border border-neutral-200 rounded-xl p-6 shadow-2xs space-y-4">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-100 pb-4">
-                  <div>
-                    <h2 class="text-lg font-bold text-neutral-900">Cotações e Pedidos B2B</h2>
-                    <p class="text-xs text-neutral-500 mt-0.5">
-                      Acompanhamento de solicitações de faturamento e propostas comerciais emitidas.
-                    </p>
-                  </div>
-                  <span class="px-2.5 py-1 text-xs font-semibold rounded-md bg-amber-50 text-amber-800 border border-amber-200">
-                    3 Cotações Pendentes
-                  </span>
-                </div>
-
-                <div class="p-4 bg-neutral-50 border border-neutral-200 rounded-lg text-xs text-neutral-700 flex items-start gap-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-neutral-500 shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
-                  <div>
-                    <span class="font-bold block text-neutral-900">Gestão de Pedidos (Sprint 7.4)</span>
-                    <span class="block mt-0.5">
-                      Visualização tabular dos orçamentos gerados via carrinho e canais B2B.
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </section>
+            <app-admin-orders-table
+              [orders]="adminDataService.orders()"
+              (updateStatus)="handleUpdateOrderStatus($event)"
+              (deleteOrder)="handleDeleteOrder($event)"
+            />
           }
 
           @case ('customers') {
-            <section aria-label="Painel de Clientes" class="space-y-4">
-              <div class="bg-white border border-neutral-200 rounded-xl p-6 shadow-2xs space-y-4">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-100 pb-4">
-                  <div>
-                    <h2 class="text-lg font-bold text-neutral-900">Base de Clientes B2B</h2>
-                    <p class="text-xs text-neutral-500 mt-0.5">
-                      Registro de confecções, ateliês e empresas cadastradas no portal.
-                    </p>
-                  </div>
-                  <span class="px-2.5 py-1 text-xs font-semibold rounded-md bg-neutral-100 text-neutral-800 border border-neutral-200">
-                    12 Contas Ativas
-                  </span>
-                </div>
-
-                <div class="p-4 bg-neutral-50 border border-neutral-200 rounded-lg text-xs text-neutral-700 flex items-start gap-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-neutral-500 shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
-                  <div>
-                    <span class="font-bold block text-neutral-900">Base de Clientes (Sprint 7.4)</span>
-                    <span class="block mt-0.5">
-                      Resumo cadastral de clientes com CNPJ, contatos e histórico de interações.
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </section>
+            <app-admin-customers-table
+              [customers]="adminDataService.customers()"
+              (updateStatus)="handleUpdateCustomerStatus($event)"
+              (deleteCustomer)="handleDeleteCustomer($event)"
+            />
           }
 
           @case ('settings') {
@@ -518,6 +489,7 @@ export type AdminTab = 'products' | 'orders' | 'customers' | 'settings';
 export class AdminComponent {
   readonly productService = inject(ProductService);
   readonly authService = inject(AuthService);
+  readonly adminDataService = inject(AdminDataService);
 
   readonly tab = input<string | undefined>(undefined);
 
@@ -607,6 +579,22 @@ export class AdminComponent {
   handleCancelProductModal(): void {
     this.isProductModalOpen.set(false);
     this.selectedProductForEdit.set(null);
+  }
+
+  handleUpdateOrderStatus(payload: { id: string; status: OrderStatus }): void {
+    this.adminDataService.updateOrderStatus(payload.id, payload.status);
+  }
+
+  handleDeleteOrder(orderId: string): void {
+    this.adminDataService.deleteOrder(orderId);
+  }
+
+  handleUpdateCustomerStatus(payload: { id: string; status: CustomerStatus }): void {
+    this.adminDataService.updateCustomerStatus(payload.id, payload.status);
+  }
+
+  handleDeleteCustomer(customerId: string): void {
+    this.adminDataService.deleteCustomer(customerId);
   }
 }
 

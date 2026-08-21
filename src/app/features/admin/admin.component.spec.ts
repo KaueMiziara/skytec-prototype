@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { AdminComponent } from './admin.component';
+import { AdminDataService } from '../../core/services/admin-data.service';
 import { AuthService } from '../../core/services/auth.service';
 import { ProductService } from '../../core/services/product.service';
 
@@ -9,17 +10,19 @@ describe('AdminComponent', () => {
   let fixture: ComponentFixture<AdminComponent>;
   let productService: ProductService;
   let authService: AuthService;
+  let adminDataService: AdminDataService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AdminComponent],
-      providers: [provideRouter([]), ProductService, AuthService]
+      providers: [provideRouter([]), ProductService, AuthService, AdminDataService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AdminComponent);
     component = fixture.componentInstance;
     productService = TestBed.inject(ProductService);
     authService = TestBed.inject(AuthService);
+    adminDataService = TestBed.inject(AdminDataService);
     fixture.detectChanges();
   });
 
@@ -208,5 +211,53 @@ describe('AdminComponent', () => {
     component.handleCancelProductModal();
     expect(component.isProductModalOpen()).toBe(false);
     expect(component.selectedProductForEdit()).toBeNull();
+  });
+
+  it('should render admin orders table when orders tab is active', () => {
+    component.selectTab('orders');
+    fixture.detectChanges();
+
+    const ordersTable = fixture.nativeElement.querySelector('app-admin-orders-table');
+    expect(ordersTable).toBeTruthy();
+  });
+
+  it('should render admin customers table when customers tab is active', () => {
+    component.selectTab('customers');
+    fixture.detectChanges();
+
+    const customersTable = fixture.nativeElement.querySelector('app-admin-customers-table');
+    expect(customersTable).toBeTruthy();
+  });
+
+  it('should update order status via handleUpdateOrderStatus', () => {
+    const firstOrder = adminDataService.orders()[0];
+    component.handleUpdateOrderStatus({ id: firstOrder.id, status: 'approved' });
+
+    const updated = adminDataService.orders().find((o) => o.id === firstOrder.id);
+    expect(updated?.status).toBe('approved');
+  });
+
+  it('should delete order via handleDeleteOrder', () => {
+    const initialCount = adminDataService.orders().length;
+    const firstOrder = adminDataService.orders()[0];
+
+    component.handleDeleteOrder(firstOrder.id);
+    expect(adminDataService.orders().length).toBe(initialCount - 1);
+  });
+
+  it('should update customer status via handleUpdateCustomerStatus', () => {
+    const firstCustomer = adminDataService.customers()[0];
+    component.handleUpdateCustomerStatus({ id: firstCustomer.id, status: 'inactive' });
+
+    const updated = adminDataService.customers().find((c) => c.id === firstCustomer.id);
+    expect(updated?.status).toBe('inactive');
+  });
+
+  it('should delete customer via handleDeleteCustomer', () => {
+    const initialCount = adminDataService.customers().length;
+    const firstCustomer = adminDataService.customers()[0];
+
+    component.handleDeleteCustomer(firstCustomer.id);
+    expect(adminDataService.customers().length).toBe(initialCount - 1);
   });
 });

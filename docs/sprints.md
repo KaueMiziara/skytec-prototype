@@ -166,7 +166,7 @@ Implement the data-dense, utilitarian management interface for B2B operations.
   - Search and column sorting.
 - [x] **7.3 Add / Edit Product Modal Form**
   - Reactive form dialog to simulate adding a new machine to the in-memory signal store.
-- [ ] **7.4 Mock Orders & Customers Views**
+- [x] **7.4 Mock Orders & Customers Views**
   - Utilitarian summary tables for recent B2B order quotes and registered clients.
 
 ---
