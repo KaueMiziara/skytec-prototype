@@ -28,7 +28,7 @@ Establish the data contracts, state services, and foundational routing configura
 
 Construct reusable dumb UI components and the persistent application frame (Header, Mega Menu, Footer).
 
-- [ ] **1.1 Base Dumb UI Components**
+- [x] **1.1 Base Dumb UI Components**
   - `src/app/shared/ui/button/button.component.ts`: Action Blue & Dark Surface button variants with focus states.
   - `src/app/shared/ui/badge/badge.component.ts`: Status and category chips.
   - `src/app/shared/ui/input/input.component.ts`: High-contrast form controls with floating or standard labels.
