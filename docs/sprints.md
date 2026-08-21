@@ -110,7 +110,7 @@ Build the reactive B2B catalog with zero-latency instant filtering and search.
 - [x] **4.3 Catalog State & Search Coordination**
   - Create `src/app/features/catalog/services/catalog-state.service.ts` or coordinate via `ProductService`.
   - Computed reactive signal for filtered & sorted products with zero page reloads.
-- [ ] **4.4 Catalog Page Container**
+- [x] **4.4 Catalog Page Container**
   - Create `src/app/features/catalog/catalog.component.ts`.
   - 2-column layout (25% sticky left sidebar, 75% reactive product grid).
   - Empty search state with reset button.
