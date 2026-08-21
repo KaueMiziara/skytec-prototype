@@ -185,6 +185,6 @@ Complete the checkout flow, lead generation, and accessibility verification.
   - Validate high-contrast color ratios across light and dark surfaces.
   - Ensure full keyboard navigation (`Tab`, `Escape`, `Enter`) on Mega Menu, Modals, and Drawers.
   - Verify ARIA attributes on interactive controls.
-- [ ] **8.4 Performance & Anti-Flicker Verification**
+- [x] **8.4 Performance & Anti-Flicker Verification**
   - Audit `OnPush` change detection and pure Signal computations across all views.
   - Ensure zero page reloads and instant mock transitions.
