@@ -147,4 +147,66 @@ describe('AdminComponent', () => {
     expect(productService.products().length).toBe(initialCount - 1);
     expect(productService.getProductById(firstProduct.id)).toBeUndefined();
   });
+
+  it('should open modal for new product when handleCreateProduct is called', () => {
+    component.handleCreateProduct();
+    expect(component.isProductModalOpen()).toBe(true);
+    expect(component.selectedProductForEdit()).toBeNull();
+  });
+
+  it('should open modal for editing when handleEditProduct is called', () => {
+    const firstProduct = productService.products()[0];
+    component.handleEditProduct(firstProduct);
+    expect(component.isProductModalOpen()).toBe(true);
+    expect(component.selectedProductForEdit()).toBe(firstProduct);
+  });
+
+  it('should add product to ProductService on handleSaveProduct in create mode', () => {
+    const initialCount = productService.products().length;
+    component.handleCreateProduct();
+
+    const newProduct = {
+      id: 'prod-new-test',
+      sku: 'SKU-NEW-01',
+      name: 'Máquina Nova Teste',
+      brand: 'SKYMAK',
+      category: 'Reta',
+      price: 3800,
+      images: ['/img.jpg'],
+      shortDescription: 'Descrição teste',
+      differentials: ['D1'],
+      specifications: { 'Velocidade': '5000' }
+    };
+
+    component.handleSaveProduct(newProduct);
+    expect(productService.products().length).toBe(initialCount + 1);
+    expect(productService.getProductById('prod-new-test')).toBeDefined();
+    expect(component.isProductModalOpen()).toBe(false);
+  });
+
+  it('should update product in ProductService on handleSaveProduct in edit mode', () => {
+    const firstProduct = productService.products()[0];
+    component.handleEditProduct(firstProduct);
+
+    const updatedProduct = {
+      ...firstProduct,
+      name: 'Nome Atualizado do Produto',
+      price: 9999
+    };
+
+    component.handleSaveProduct(updatedProduct);
+    const retrieved = productService.getProductById(firstProduct.id);
+    expect(retrieved?.name).toBe('Nome Atualizado do Produto');
+    expect(retrieved?.price).toBe(9999);
+    expect(component.isProductModalOpen()).toBe(false);
+  });
+
+  it('should close modal on handleCancelProductModal', () => {
+    component.handleCreateProduct();
+    expect(component.isProductModalOpen()).toBe(true);
+
+    component.handleCancelProductModal();
+    expect(component.isProductModalOpen()).toBe(false);
+    expect(component.selectedProductForEdit()).toBeNull();
+  });
 });

@@ -11,13 +11,14 @@ import { RouterLink } from '@angular/router';
 import { Product } from '../../core/models/product.model';
 import { AuthService } from '../../core/services/auth.service';
 import { ProductService } from '../../core/services/product.service';
+import { AdminProductModalComponent } from './components/admin-product-modal/admin-product-modal.component';
 import { AdminProductTableComponent } from './components/admin-product-table/admin-product-table.component';
 
 export type AdminTab = 'products' | 'orders' | 'customers' | 'settings';
 
 @Component({
   selector: 'app-admin',
-  imports: [RouterLink, AdminProductTableComponent],
+  imports: [RouterLink, AdminProductTableComponent, AdminProductModalComponent],
   template: `
     <div class="min-h-[calc(100vh-4rem)] bg-[#f5f5f7] text-neutral-900 flex flex-col lg:flex-row">
       <header class="lg:hidden bg-[#101010] text-white px-4 py-3 border-b border-neutral-800 flex items-center justify-between">
@@ -498,6 +499,15 @@ export type AdminTab = 'products' | 'orders' | 'customers' | 'settings';
           }
         }
       </main>
+
+      <app-admin-product-modal
+        [isOpen]="isProductModalOpen()"
+        [product]="selectedProductForEdit()"
+        [availableBrands]="productService.brands()"
+        [availableCategories]="productService.categories()"
+        (save)="handleSaveProduct($event)"
+        (cancel)="handleCancelProductModal()"
+      />
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -513,6 +523,8 @@ export class AdminComponent {
 
   readonly activeTab = signal<AdminTab>('products');
   readonly isMobileSidebarOpen = signal<boolean>(false);
+  readonly isProductModalOpen = signal<boolean>(false);
+  readonly selectedProductForEdit = signal<Product | null>(null);
 
   readonly currentSectionTitle = computed<string>(() => {
     switch (this.activeTab()) {
@@ -567,12 +579,34 @@ export class AdminComponent {
     this.isMobileSidebarOpen.set(false);
   }
 
-  handleEditProduct(product: Product): void {}
+  handleEditProduct(product: Product): void {
+    this.selectedProductForEdit.set(product);
+    this.isProductModalOpen.set(true);
+  }
 
   handleDeleteProduct(productId: string): void {
     this.productService.deleteProduct(productId);
   }
 
-  handleCreateProduct(): void {}
+  handleCreateProduct(): void {
+    this.selectedProductForEdit.set(null);
+    this.isProductModalOpen.set(true);
+  }
+
+  handleSaveProduct(product: Product): void {
+    const existing = this.selectedProductForEdit();
+    if (existing) {
+      this.productService.updateProduct(existing.id, product);
+    } else {
+      this.productService.addProduct(product);
+    }
+    this.isProductModalOpen.set(false);
+    this.selectedProductForEdit.set(null);
+  }
+
+  handleCancelProductModal(): void {
+    this.isProductModalOpen.set(false);
+    this.selectedProductForEdit.set(null);
+  }
 }
 
