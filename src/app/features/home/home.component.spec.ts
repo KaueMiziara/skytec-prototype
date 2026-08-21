@@ -37,4 +37,9 @@ describe('HomeComponent', () => {
     const carouselElement = fixture.nativeElement.querySelector('app-brand-carousel');
     expect(carouselElement).toBeTruthy();
   });
+
+  it('should render app-featured-products component', () => {
+    const featuredElement = fixture.nativeElement.querySelector('app-featured-products');
+    expect(featuredElement).toBeTruthy();
+  });
 });

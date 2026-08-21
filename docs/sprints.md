@@ -66,7 +66,7 @@ Implement the high-conversion, utilitarian B2B landing page using copy and desig
   - Create `src/app/features/home/components/brand-carousel/brand-carousel.component.ts`.
   - Horizontal quick-filter bar featuring Jack, Sun Special, Siruba, etc.
   - Route navigation to Catalog filtered by clicked brand.
-- [ ] **2.4 Best Sellers Product Grid**
+- [x] **2.4 Best Sellers Product Grid**
   - Create `src/app/features/home/components/featured-products/featured-products.component.ts`.
   - Responsive 2-column (mobile) to 4-column (desktop) grid using dumb `ProductCardComponent`.
 - [ ] **2.5 Machinery in Action (Media / Shorts)**

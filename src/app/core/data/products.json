@@ -16,7 +16,8 @@
       "specifications": {
         "Tipo de Máquina": "Reta Industrial",
         "Voltagem": "220V"
-      }
+      },
+      "isFeatured": true
     },
     {
       "id": "PROD-SUN-SS65D",
@@ -49,7 +50,8 @@
         "Iluminação": "LED embutido",
         "Control Box": "Acoplado ao cabeçote",
         "Voltagem": "220V"
-      }
+      },
+      "isFeatured": true
     },
     {
       "id": "PROD-SKYMAK-R8",
@@ -77,6 +79,34 @@
         "Tipo de Agulha": "DBx1",
         "Sistema de Lubrificação": "Automático",
         "Iluminação": "LED integrado",
+        "Voltagem": "220V"
+      },
+      "isFeatured": true
+    },
+    {
+      "id": "PROD-SIRUBA-747K",
+      "sku": "747K-514M2-24",
+      "name": "Máquina de Costura Industrial Overlock 4 Fios Siruba 747K Direct Drive",
+      "brand": "Siruba",
+      "category": "Overlock",
+      "price": 4200.0,
+      "images": ["/assets/mock/siruba-747k.jpg"],
+      "shortDescription": "Overlock industrial de alta velocidade para fechamento e acabamento perfeito em malhas e tecidos leves a médios.",
+      "differentials": [
+        "Motor Direct Drive Silencioso de Alto Torque.",
+        "Sistema de corte de linha e sucção de resíduos.",
+        "Passagem de fios simplificada com guia colorido.",
+        "Alta durabilidade com peças de aço temperado."
+      ],
+      "specifications": {
+        "Tipo de Máquina": "Overlock 4 Fios Industrial",
+        "Aplicação": "Malhas, tecidos leves e médios",
+        "Tipo de Motor": "Direct Drive Integrado",
+        "Potência": "550W",
+        "Nº de Agulhas": "2",
+        "Nº de Fios": "4",
+        "Velocidade Máxima": "6.500 rpm",
+        "Largura do Ponto": "4 a 6 mm",
         "Voltagem": "220V"
       },
       "isFeatured": true
