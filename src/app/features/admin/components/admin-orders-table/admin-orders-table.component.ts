@@ -366,7 +366,10 @@ export type OrderSortDirection = 'asc' | 'desc';
       }
     </section>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '(document:keydown.escape)': 'onEscape()'
+  }
 })
 export class AdminOrdersTableComponent {
   readonly orders = input<Order[]>([]);
@@ -533,5 +536,11 @@ export class AdminOrdersTableComponent {
 
   closeDetails(): void {
     this.selectedOrderForDetails.set(null);
+  }
+
+  protected onEscape(): void {
+    if (this.selectedOrderForDetails()) {
+      this.closeDetails();
+    }
   }
 }

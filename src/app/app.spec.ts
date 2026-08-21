@@ -24,8 +24,9 @@ describe('App', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('a[href="#main-content"]')).not.toBeNull();
     expect(compiled.querySelector('app-header')).not.toBeNull();
-    expect(compiled.querySelector('main')).not.toBeNull();
+    expect(compiled.querySelector('main#main-content')).not.toBeNull();
     expect(compiled.querySelector('app-footer')).not.toBeNull();
     expect(compiled.querySelector('app-cart-drawer')).not.toBeNull();
   });

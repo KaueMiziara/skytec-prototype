@@ -181,7 +181,7 @@ Complete the checkout flow, lead generation, and accessibility verification.
 - [x] **8.2 WhatsApp B2B Quote Integration**
   - Format cart contents into a pre-filled WhatsApp message payload (SKUs, quantities, estimated total).
   - "Finalizar Orçamento via WhatsApp" CTA trigger.
-- [ ] **8.3 Accessibility (a11y) & WCAG AA Audit**
+- [x] **8.3 Accessibility (a11y) & WCAG AA Audit**
   - Validate high-contrast color ratios across light and dark surfaces.
   - Ensure full keyboard navigation (`Tab`, `Escape`, `Enter`) on Mega Menu, Modals, and Drawers.
   - Verify ARIA attributes on interactive controls.

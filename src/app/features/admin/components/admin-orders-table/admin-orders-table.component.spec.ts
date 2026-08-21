@@ -150,4 +150,17 @@ describe('AdminOrdersTableComponent', () => {
     fixture.detectChanges();
     expect(component.selectedOrderForDetails()).toBeNull();
   });
+
+  it('should close details modal dialog on Escape key press', () => {
+    component.selectedOrderForDetails.set(mockOrders[0]);
+    fixture.detectChanges();
+
+    expect(component.selectedOrderForDetails()).not.toBeNull();
+
+    const event = new KeyboardEvent('keydown', { key: 'Escape' });
+    document.dispatchEvent(event);
+    fixture.detectChanges();
+
+    expect(component.selectedOrderForDetails()).toBeNull();
+  });
 });
