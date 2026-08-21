@@ -45,7 +45,7 @@ Construct reusable dumb UI components and the persistent application frame (Head
   - Create `src/app/shared/layout/footer/footer.component.ts` with `#101010` background.
   - Multi-column grid: Company details, CNPJ, contact info, security badges, and quick links.
   - Bottom bar with exact attribution: `Created by: <Your Name> — ⟨ Quantum Computing | † | Software Engineering ⟩`.
-- [ ] **1.5 Shell Integration**
+- [x] **1.5 Shell Integration**
   - Integrate Header, `<router-outlet />`, and Footer into `src/app/app.html`.
 
 ---
