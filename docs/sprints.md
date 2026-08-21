@@ -157,7 +157,7 @@ Build the minimalist, distraction-free account access interface.
 
 Implement the data-dense, utilitarian management interface for B2B operations.
 
-- [ ] **7.1 Admin Layout & Sidebar**
+- [x] **7.1 Admin Layout & Sidebar**
   - Create `src/app/features/admin/admin.component.ts` with `#101010` fixed sidebar.
   - Navigation links: Products, Orders, Customers, Settings.
 - [ ] **7.2 Products Data Table**
