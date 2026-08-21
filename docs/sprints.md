@@ -58,7 +58,7 @@ Implement the high-conversion, utilitarian B2B landing page using copy and desig
   - Create `src/app/features/home/components/hero/hero.component.ts`.
   - Implement official copy: H1, H2, and clean industrial imagery/background overlay.
   - Primary CTA directing to catalog.
-- [ ] **2.2 Flagship Product Highlight Banner (SKYMAK R8)**
+- [x] **2.2 Flagship Product Highlight Banner (SKYMAK R8)**
   - Create `src/app/features/home/components/flagship-banner/flagship-banner.component.ts`.
   - Implement Tag ("Referência em máquinas de costura no Brasil"), H3, supporting copy, and cut-out product image.
   - Direct CTA button: "CONSULTAR UM VENDEDOR" (WhatsApp link).

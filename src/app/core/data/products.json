@@ -50,6 +50,36 @@
         "Control Box": "Acoplado ao cabeçote",
         "Voltagem": "220V"
       }
+    },
+    {
+      "id": "PROD-SKYMAK-R8",
+      "sku": "R8-SKYMAK",
+      "name": "Máquina de Costura Industrial Reta Eletrônica Direct Drive SKYMAK R8",
+      "brand": "SKYMAK",
+      "category": "Reta",
+      "price": 3890.0,
+      "images": ["/assets/mock/skymak-r8.jpg"],
+      "shortDescription": "Alta tecnologia e precisão para elevar o nível da sua produção. Referência em máquinas de costura no Brasil.",
+      "differentials": [
+        "Motor Direct Drive Integrado: Menos ruído e até 70% de economia de energia.",
+        "Corte de Linha Automático e Arremate de Alta Precisão.",
+        "Painel Touch Digital Integrado ao Cabeçote.",
+        "Iluminação LED com Ajuste de Intensidade."
+      ],
+      "specifications": {
+        "Tipo de Máquina": "Reta Industrial Eletrônica",
+        "Aplicação": "Tecidos leves, médios e pesados",
+        "Tipo de Motor": "Direct Drive Integrado",
+        "Potência": "550W",
+        "Velocidade Máxima": "5.000 rpm",
+        "Comprimento do Ponto": "0,5 a 5,0 mm",
+        "Altura do Calcador": "5,5 a 13 mm",
+        "Tipo de Agulha": "DBx1",
+        "Sistema de Lubrificação": "Automático",
+        "Iluminação": "LED integrado",
+        "Voltagem": "220V"
+      },
+      "isFeatured": true
     }
   ]
 }
