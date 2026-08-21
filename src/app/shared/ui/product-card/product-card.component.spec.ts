@@ -56,4 +56,14 @@ describe('ProductCardComponent', () => {
 
     expect(emittedProduct).toEqual(mockProduct);
   });
+
+  it('should fallback to placeholder icon when image fails to load', () => {
+    const img = fixture.nativeElement.querySelector('img') as HTMLImageElement;
+    if (img) {
+      img.dispatchEvent(new Event('error'));
+      fixture.detectChanges();
+    }
+    const svg = fixture.nativeElement.querySelector('svg');
+    expect(svg).toBeTruthy();
+  });
 });

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Product } from '../../../core/models/product.model';
 
@@ -25,17 +25,26 @@ import { Product } from '../../../core/models/product.model';
           </div>
 
           <a [routerLink]="['/produto', product().id]" class="w-full h-full flex flex-col items-center justify-center focus-visible:outline-none" [attr.aria-label]="product().name">
-            <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-white border border-neutral-200/80 flex items-center justify-center shadow-inner text-[#0573cc] group-hover:scale-105 transition-transform duration-200">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16" aria-hidden="true">
-                <rect x="2" y="6" width="20" height="12" rx="2" />
-                <path d="M6 12h.01" />
-                <path d="M10 12h.01" />
-                <path d="M14 12h.01" />
-                <path d="M18 12h.01" />
-                <path d="M12 2v4" />
-                <path d="M12 18v4" />
-              </svg>
-            </div>
+            @if (hasValidImage()) {
+              <img
+                [src]="product().images[0]"
+                [alt]="product().name"
+                (error)="handleImageError()"
+                class="max-h-32 sm:max-h-36 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+              />
+            } @else {
+              <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white border border-neutral-200/80 flex items-center justify-center shadow-inner text-[#0573cc] group-hover:scale-105 transition-transform duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 sm:w-14 sm:h-14" aria-hidden="true">
+                  <rect x="2" y="6" width="20" height="12" rx="2" />
+                  <path d="M6 12h.01" />
+                  <path d="M10 12h.01" />
+                  <path d="M14 12h.01" />
+                  <path d="M18 12h.01" />
+                  <path d="M12 2v4" />
+                  <path d="M12 18v4" />
+                </svg>
+              </div>
+            }
           </a>
         </div>
 
@@ -97,12 +106,23 @@ export class ProductCardComponent {
   readonly product = input.required<Product>();
   readonly addedToCart = output<Product>();
 
+  protected readonly imageFailed = signal(false);
+
+  protected readonly hasValidImage = computed(() => {
+    const images = this.product().images;
+    return Boolean(images && images.length > 0 && !this.imageFailed());
+  });
+
   protected readonly formattedPrice = computed(() => {
     return this.product().price.toLocaleString('pt-BR', {
       style: 'currency',
       currency: 'BRL'
     });
   });
+
+  protected handleImageError(): void {
+    this.imageFailed.set(true);
+  }
 
   protected handleAddToCart(event: MouseEvent): void {
     event.stopPropagation();

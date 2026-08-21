@@ -99,7 +99,7 @@ Build the single-column, content-dense institutional storytelling page adhering 
 
 Build the reactive B2B catalog with zero-latency instant filtering and search.
 
-- [ ] **4.1 Reusable Product Card Component**
+- [x] **4.1 Reusable Product Card Component**
   - Create `src/app/shared/ui/product-card/product-card.component.ts`.
   - White card surface (`#FFFFFF`), product image, bold H3 title, SKU badge, large price typography, and full-width Action Blue "Add to Cart" button.
 - [ ] **4.2 Catalog Filter Sidebar (Desktop & Mobile Drawer)**
