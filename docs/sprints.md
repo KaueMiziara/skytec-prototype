@@ -16,7 +16,7 @@ Establish the data contracts, state services, and foundational routing configura
   - Create `src/app/core/services/product.service.ts` (`providedIn: 'root'`) importing `products.json` directly.
   - Implement reactive Signals: `products()`, `categories()`, `brands()`, and computed helpers (`featuredProducts()`).
   - Implement synchronous retrieval methods: `getProductById()`, `getProductBySku()`, `getRelatedProducts()`.
-- [ ] **0.3 Cart State Service**
+- [x] **0.3 Cart State Service**
   - Create `src/app/core/services/cart.service.ts` using Signals (`items()`, `totalCount()`, `subtotal()`).
   - Implement methods: `addItem()`, `removeItem()`, `updateQuantity()`, `clearCart()`, `generateWhatsAppLink()`.
 - [ ] **0.4 Standalone App Routing Structure**
