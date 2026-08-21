@@ -3,6 +3,7 @@ import { HeroComponent } from './components/hero/hero.component';
 import { FlagshipBannerComponent } from './components/flagship-banner/flagship-banner.component';
 import { BrandCarouselComponent } from './components/brand-carousel/brand-carousel.component';
 import { FeaturedProductsComponent } from './components/featured-products/featured-products.component';
+import { MediaSectionComponent } from './components/media-section/media-section.component';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,8 @@ import { FeaturedProductsComponent } from './components/featured-products/featur
     HeroComponent,
     FlagshipBannerComponent,
     BrandCarouselComponent,
-    FeaturedProductsComponent
+    FeaturedProductsComponent,
+    MediaSectionComponent
   ],
   template: `
     <main class="min-h-screen">
@@ -18,6 +20,7 @@ import { FeaturedProductsComponent } from './components/featured-products/featur
       <app-flagship-banner />
       <app-brand-carousel />
       <app-featured-products />
+      <app-media-section />
     </main>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

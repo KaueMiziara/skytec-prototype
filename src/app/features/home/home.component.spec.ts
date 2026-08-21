@@ -42,4 +42,9 @@ describe('HomeComponent', () => {
     const featuredElement = fixture.nativeElement.querySelector('app-featured-products');
     expect(featuredElement).toBeTruthy();
   });
+
+  it('should render app-media-section component', () => {
+    const mediaElement = fixture.nativeElement.querySelector('app-media-section');
+    expect(mediaElement).toBeTruthy();
+  });
 });

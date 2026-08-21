@@ -69,7 +69,7 @@ Implement the high-conversion, utilitarian B2B landing page using copy and desig
 - [x] **2.4 Best Sellers Product Grid**
   - Create `src/app/features/home/components/featured-products/featured-products.component.ts`.
   - Responsive 2-column (mobile) to 4-column (desktop) grid using dumb `ProductCardComponent`.
-- [ ] **2.5 Machinery in Action (Media / Shorts)**
+- [x] **2.5 Machinery in Action (Media / Shorts)**
   - Create `src/app/features/home/components/media-section/media-section.component.ts`.
   - Utilitarian 16:9 / 9:16 responsive video placeholders with lazy iframe loading.
 - [ ] **2.6 Institutional Snippet**
