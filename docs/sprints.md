@@ -12,7 +12,7 @@ Establish the data contracts, state services, and foundational routing configura
   - Create `src/app/core/models/product.model.ts` with strict TypeScript interfaces matching `products.json` (`Product`, `ProductSpecification`, `ProductFilterState`, `Category`, `Brand`).
   - Create `src/app/core/models/cart.model.ts` for cart items, quantities, and totals.
   - Create `src/app/core/models/user.model.ts` for mock authentication state.
-- [ ] **0.2 Product Core Service**
+- [x] **0.2 Product Core Service**
   - Create `src/app/core/services/product.service.ts` (`providedIn: 'root'`) importing `products.json` directly.
   - Implement reactive Signals: `products()`, `categories()`, `brands()`, and computed helpers (`featuredProducts()`).
   - Implement synchronous retrieval methods: `getProductById()`, `getProductBySku()`, `getRelatedProducts()`.
