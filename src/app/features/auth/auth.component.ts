@@ -2,11 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   effect,
+  inject,
   input,
   signal
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LoginCredentials, RegisterData } from '../../core/models/user.model';
+import { AuthService } from '../../core/services/auth.service';
+import { ButtonComponent } from '../../shared/ui/button/button.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 
@@ -14,7 +17,7 @@ export type AuthTab = 'login' | 'register';
 
 @Component({
   selector: 'app-auth',
-  imports: [RouterLink, LoginFormComponent, RegisterFormComponent],
+  imports: [RouterLink, ButtonComponent, LoginFormComponent, RegisterFormComponent],
   template: `
     <main class="min-h-screen bg-[#f5f5f7] text-neutral-900 pb-16 sm:pb-24">
       <nav aria-label="Navegação Estrutural" class="bg-white border-b border-neutral-200">
@@ -54,94 +57,183 @@ export type AuthTab = 'login' | 'register';
             Minha conta SKYTEC
           </h1>
           <p class="text-xs sm:text-sm text-neutral-500 mt-1.5">
-            Acesse sua conta ou cadastre sua confecção para solicitar orçamentos.
+            {{
+              authService.isAuthenticated()
+                ? 'Sessão ativa e gerenciamento de perfil.'
+                : 'Acesse sua conta ou cadastre sua confecção para solicitar orçamentos.'
+            }}
           </p>
         </div>
 
-        <div class="bg-white border border-neutral-200 rounded-2xl shadow-xs p-6 sm:p-8">
-          <div
-            role="tablist"
-            aria-label="Opções de autenticação"
-            class="grid grid-cols-2 p-1 bg-neutral-100 rounded-xl border border-neutral-200/80 mb-6"
-          >
-            <button
-              type="button"
-              role="tab"
-              id="tab-login"
-              [attr.aria-selected]="activeTab() === 'login'"
-              [attr.tabindex]="activeTab() === 'login' ? 0 : -1"
-              aria-controls="panel-login"
-              (click)="setTab('login')"
-              (keydown)="handleTabKeydown($event, 'login')"
-              class="py-2.5 px-3 text-xs sm:text-sm font-bold rounded-lg transition-all text-center cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#077fbd]"
-              [class.bg-white]="activeTab() === 'login'"
-              [class.text-neutral-900]="activeTab() === 'login'"
-              [class.shadow-xs]="activeTab() === 'login'"
-              [class.text-neutral-600]="activeTab() !== 'login'"
-              [class.hover:text-neutral-900]="activeTab() !== 'login'"
-            >
-              Entrar
-            </button>
+        @if (authService.isAuthenticated()) {
+          <div class="bg-white border border-neutral-200 rounded-2xl shadow-xs p-6 sm:p-8 space-y-6">
+            <div class="flex items-center justify-between border-b border-neutral-100 pb-4">
+              <div class="space-y-1">
+                <span class="text-xs text-neutral-500 uppercase tracking-wider font-semibold">
+                  Usuário Autenticado
+                </span>
+                <h2 class="text-xl font-black text-neutral-900">
+                  {{ authService.currentUser()?.name }}
+                </h2>
+              </div>
+              <span
+                class="px-2.5 py-1 text-xs font-bold uppercase rounded-md"
+                [class.bg-purple-100]="authService.isAdmin()"
+                [class.text-purple-800]="authService.isAdmin()"
+                [class.bg-blue-100]="!authService.isAdmin()"
+                [class.text-blue-800]="!authService.isAdmin()"
+              >
+                {{ authService.isAdmin() ? 'Administrador' : 'Cliente B2B' }}
+              </span>
+            </div>
 
-            <button
-              type="button"
-              role="tab"
-              id="tab-register"
-              [attr.aria-selected]="activeTab() === 'register'"
-              [attr.tabindex]="activeTab() === 'register' ? 0 : -1"
-              aria-controls="panel-register"
-              (click)="setTab('register')"
-              (keydown)="handleTabKeydown($event, 'register')"
-              class="py-2.5 px-3 text-xs sm:text-sm font-bold rounded-lg transition-all text-center cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#077fbd]"
-              [class.bg-white]="activeTab() === 'register'"
-              [class.text-neutral-900]="activeTab() === 'register'"
-              [class.shadow-xs]="activeTab() === 'register'"
-              [class.text-neutral-600]="activeTab() !== 'register'"
-              [class.hover:text-neutral-900]="activeTab() !== 'register'"
-            >
-              Cadastrar
-            </button>
+            <div class="space-y-3 text-xs">
+              <div class="p-3 bg-[#f5f5f7] rounded-lg border border-neutral-200/70 space-y-1">
+                <span class="text-neutral-500 block">E-mail:</span>
+                <span class="font-semibold text-neutral-900 block font-mono text-sm">
+                  {{ authService.currentUser()?.email }}
+                </span>
+              </div>
+
+              @if (authService.currentUser()?.cnpjCpf) {
+                <div class="p-3 bg-[#f5f5f7] rounded-lg border border-neutral-200/70 space-y-1">
+                  <span class="text-neutral-500 block">CNPJ / CPF:</span>
+                  <span class="font-semibold text-neutral-900 block font-mono text-sm">
+                    {{ authService.currentUser()?.cnpjCpf }}
+                  </span>
+                </div>
+              }
+
+              @if (authService.currentUser()?.phone) {
+                <div class="p-3 bg-[#f5f5f7] rounded-lg border border-neutral-200/70 space-y-1">
+                  <span class="text-neutral-500 block">Telefone / WhatsApp:</span>
+                  <span class="font-semibold text-neutral-900 block font-mono text-sm">
+                    {{ authService.currentUser()?.phone }}
+                  </span>
+                </div>
+              }
+            </div>
+
+            <div class="pt-2 space-y-2.5">
+              @if (authService.isAdmin()) {
+                <a
+                  routerLink="/admin"
+                  class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-[#101010] hover:bg-neutral-800 text-white text-xs font-bold uppercase tracking-wider transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                  <span>Painel Administrativo</span>
+                </a>
+              }
+
+              <a
+                routerLink="/catalogo"
+                class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-[#077fbd] hover:bg-[#066a9e] text-white text-xs font-bold uppercase tracking-wider transition-colors"
+              >
+                <span>Explorar Catálogo de Máquinas</span>
+              </a>
+
+              <app-button
+                variant="outline"
+                size="md"
+                [fullWidth]="true"
+                (clicked)="handleLogout()"
+                ariaLabel="Encerrar sessão"
+              >
+                <span>Encerrar Sessão</span>
+              </app-button>
+            </div>
           </div>
+        } @else {
+          <div class="bg-white border border-neutral-200 rounded-2xl shadow-xs p-6 sm:p-8">
+            <div
+              role="tablist"
+              aria-label="Opções de autenticação"
+              class="grid grid-cols-2 p-1 bg-neutral-100 rounded-xl border border-neutral-200/80 mb-6"
+            >
+              <button
+                type="button"
+                role="tab"
+                id="tab-login"
+                [attr.aria-selected]="activeTab() === 'login'"
+                [attr.tabindex]="activeTab() === 'login' ? 0 : -1"
+                aria-controls="panel-login"
+                (click)="setTab('login')"
+                (keydown)="handleTabKeydown($event, 'login')"
+                class="py-2.5 px-3 text-xs sm:text-sm font-bold rounded-lg transition-all text-center cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#077fbd]"
+                [class.bg-white]="activeTab() === 'login'"
+                [class.text-neutral-900]="activeTab() === 'login'"
+                [class.shadow-xs]="activeTab() === 'login'"
+                [class.text-neutral-600]="activeTab() !== 'login'"
+                [class.hover:text-neutral-900]="activeTab() !== 'login'"
+              >
+                Entrar
+              </button>
 
-          @if (activeTab() === 'login') {
-            <div
-              role="tabpanel"
-              id="panel-login"
-              aria-labelledby="tab-login"
-              tabindex="0"
-              class="focus:outline-none"
-            >
-              <app-login-form
-                [loading]="isLoading()"
-                [errorMessage]="authError()"
-                (loginSubmit)="handleLogin($event)"
-                (switchToRegister)="setTab('register')"
-              />
+              <button
+                type="button"
+                role="tab"
+                id="tab-register"
+                [attr.aria-selected]="activeTab() === 'register'"
+                [attr.tabindex]="activeTab() === 'register' ? 0 : -1"
+                aria-controls="panel-register"
+                (click)="setTab('register')"
+                (keydown)="handleTabKeydown($event, 'register')"
+                class="py-2.5 px-3 text-xs sm:text-sm font-bold rounded-lg transition-all text-center cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#077fbd]"
+                [class.bg-white]="activeTab() === 'register'"
+                [class.text-neutral-900]="activeTab() === 'register'"
+                [class.shadow-xs]="activeTab() === 'register'"
+                [class.text-neutral-600]="activeTab() !== 'register'"
+                [class.hover:text-neutral-900]="activeTab() !== 'register'"
+              >
+                Cadastrar
+              </button>
             </div>
-          } @else {
-            <div
-              role="tabpanel"
-              id="panel-register"
-              aria-labelledby="tab-register"
-              tabindex="0"
-              class="focus:outline-none"
-            >
-              <app-register-form
-                [loading]="isLoading()"
-                [errorMessage]="authError()"
-                (registerSubmit)="handleRegister($event)"
-                (switchToLogin)="setTab('login')"
-              />
-            </div>
-          }
-        </div>
+
+            @if (activeTab() === 'login') {
+              <div
+                role="tabpanel"
+                id="panel-login"
+                aria-labelledby="tab-login"
+                tabindex="0"
+                class="focus:outline-none"
+              >
+                <app-login-form
+                  [loading]="isLoading()"
+                  [errorMessage]="authError()"
+                  (loginSubmit)="handleLogin($event)"
+                  (switchToRegister)="setTab('register')"
+                />
+              </div>
+            } @else {
+              <div
+                role="tabpanel"
+                id="panel-register"
+                aria-labelledby="tab-register"
+                tabindex="0"
+                class="focus:outline-none"
+              >
+                <app-register-form
+                  [loading]="isLoading()"
+                  [errorMessage]="authError()"
+                  (registerSubmit)="handleRegister($event)"
+                  (switchToLogin)="setTab('login')"
+                />
+              </div>
+            }
+          </div>
+        }
       </section>
     </main>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthComponent {
+  private readonly router = inject(Router);
+  readonly authService = inject(AuthService);
+
   readonly tab = input<string | undefined>(undefined);
+  readonly returnUrl = input<string | undefined>(undefined);
+
   readonly activeTab = signal<AuthTab>('login');
   readonly isLoading = signal<boolean>(false);
   readonly authError = signal<string | null>(null);
@@ -185,10 +277,42 @@ export class AuthComponent {
 
   handleLogin(credentials: LoginCredentials): void {
     this.authError.set(null);
+    this.isLoading.set(true);
+
+    const success = this.authService.login(credentials);
+    this.isLoading.set(false);
+
+    if (!success) {
+      this.authError.set('Credenciais inválidas. Verifique seu e-mail e senha.');
+      return;
+    }
+
+    if (this.authService.isAdmin()) {
+      this.router.navigate(['/admin']);
+    } else if (this.returnUrl()) {
+      this.router.navigateByUrl(this.returnUrl()!);
+    } else {
+      this.router.navigate(['/catalogo']);
+    }
   }
 
   handleRegister(data: RegisterData): void {
     this.authError.set(null);
+    this.isLoading.set(true);
+
+    this.authService.register(data);
+    this.isLoading.set(false);
+
+    if (this.returnUrl()) {
+      this.router.navigateByUrl(this.returnUrl()!);
+    } else {
+      this.router.navigate(['/catalogo']);
+    }
+  }
+
+  handleLogout(): void {
+    this.authService.logout();
+    this.setTab('login');
   }
 
   private focusTab(tab: AuthTab): void {
@@ -196,3 +320,4 @@ export class AuthComponent {
     tabElement?.focus();
   }
 }
+

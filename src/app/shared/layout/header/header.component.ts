@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
 import { CartService } from '../../../core/services/cart.service';
 import { ProductService } from '../../../core/services/product.service';
 import { MegaMenuComponent } from './mega-menu.component';
@@ -159,21 +160,31 @@ import { MegaMenuComponent } from './mega-menu.component';
               class="inline-flex items-center gap-1.5 p-2 sm:px-3 sm:py-2 rounded-lg text-neutral-300 hover:text-white hover:bg-neutral-800 transition-colors text-xs font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#077fbd]"
               aria-label="Minha Conta SKYTEC"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="w-5 h-5"
-                aria-hidden="true"
-              >
-                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-              <span class="hidden sm:inline">Conta</span>
+              <div class="relative">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="w-5 h-5"
+                  aria-hidden="true"
+                >
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+                @if (authService.isAuthenticated()) {
+                  <span
+                    class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-[#101010]"
+                    aria-hidden="true"
+                  ></span>
+                }
+              </div>
+              <span class="hidden sm:inline">
+                {{ authService.isAuthenticated() ? (authService.currentUser()?.name?.split(' ')?.[0] || 'Conta') : 'Conta' }}
+              </span>
             </a>
 
             <button
@@ -468,6 +479,7 @@ export class HeaderComponent {
   private readonly router = inject(Router);
   readonly cartService = inject(CartService);
   readonly productService = inject(ProductService);
+  readonly authService = inject(AuthService);
 
   readonly searchQuery = signal<string>('');
   readonly isSearchFocused = signal<boolean>(false);

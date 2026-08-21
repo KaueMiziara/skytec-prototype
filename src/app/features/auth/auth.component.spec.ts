@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 import { AuthComponent } from './auth.component';
 
 describe('AuthComponent', () => {
@@ -151,6 +152,94 @@ describe('AuthComponent', () => {
 
     fixture.componentRef.setInput('tab', 'entrar');
     fixture.detectChanges();
+    expect(component.activeTab()).toBe('login');
+  });
+
+  it('should handle client login and redirect to catalog', () => {
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigate');
+
+    component.handleLogin({
+      email: 'cliente@skytec.com.br',
+      password: 'password123'
+    });
+
+    expect(component.authService.isAuthenticated()).toBe(true);
+    expect(navigateSpy).toHaveBeenCalledWith(['/catalogo']);
+  });
+
+  it('should handle admin login and redirect to admin panel', () => {
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigate');
+
+    component.handleLogin({
+      email: 'admin@skytec.com.br',
+      password: 'password123'
+    });
+
+    expect(component.authService.isAuthenticated()).toBe(true);
+    expect(component.authService.isAdmin()).toBe(true);
+    expect(navigateSpy).toHaveBeenCalledWith(['/admin']);
+  });
+
+  it('should handle returnUrl redirection on successful login', () => {
+    const router = TestBed.inject(Router);
+    const navigateByUrlSpy = vi.spyOn(router, 'navigateByUrl');
+
+    fixture.componentRef.setInput('returnUrl', '/produto/1');
+    fixture.detectChanges();
+
+    component.handleLogin({
+      email: 'cliente@skytec.com.br',
+      password: 'password123'
+    });
+
+    expect(navigateByUrlSpy).toHaveBeenCalledWith('/produto/1');
+  });
+
+  it('should handle registration and redirect to catalog', () => {
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigate');
+
+    component.handleRegister({
+      name: 'Confecção Silva',
+      email: 'silva@confeccao.com.br',
+      cnpjCpf: '12345678000199',
+      phone: '11987654321',
+      password: 'password123'
+    });
+
+    expect(component.authService.isAuthenticated()).toBe(true);
+    expect(component.authService.currentUser()?.name).toBe('Confecção Silva');
+    expect(navigateSpy).toHaveBeenCalledWith(['/catalogo']);
+  });
+
+  it('should display authenticated profile card when user is logged in', () => {
+    component.authService.login({
+      email: 'cliente@skytec.com.br',
+      password: '123'
+    });
+    fixture.detectChanges();
+
+    const text = fixture.nativeElement.textContent;
+    expect(text).toContain('Usuário Autenticado');
+    expect(text).toContain('Confecção Modelo');
+    expect(text).toContain('cliente@skytec.com.br');
+    expect(text).toContain('Cliente B2B');
+    expect(text).toContain('Encerrar Sessão');
+  });
+
+  it('should logout and return to login tab', () => {
+    component.authService.login({
+      email: 'cliente@skytec.com.br',
+      password: '123'
+    });
+    fixture.detectChanges();
+
+    component.handleLogout();
+    fixture.detectChanges();
+
+    expect(component.authService.isAuthenticated()).toBe(false);
     expect(component.activeTab()).toBe('login');
   });
 });
