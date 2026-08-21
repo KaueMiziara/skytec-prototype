@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { HeaderComponent } from './header.component';
 import { CartService } from '../../../core/services/cart.service';
+import { ProductService } from '../../../core/services/product.service';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -12,7 +13,7 @@ describe('HeaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HeaderComponent],
-      providers: [provideRouter([])]
+      providers: [provideRouter([]), ProductService, CartService]
     }).compileComponents();
 
     router = TestBed.inject(Router);
@@ -57,5 +58,29 @@ describe('HeaderComponent', () => {
 
     cartButton.click();
     expect(toggleSpy).toHaveBeenCalled();
+  });
+
+  it('should toggle mega menu when trigger button is clicked', () => {
+    expect(component.isMegaMenuOpen()).toBe(false);
+    const megaMenuBtn = Array.from(fixture.nativeElement.querySelectorAll('button')).find((btn) =>
+      (btn as HTMLElement).textContent?.includes('Todas as Máquinas')
+    ) as HTMLButtonElement;
+
+    megaMenuBtn.click();
+    fixture.detectChanges();
+
+    expect(component.isMegaMenuOpen()).toBe(true);
+  });
+
+  it('should toggle mobile navigation drawer when hamburger button is clicked', () => {
+    expect(component.isMobileMenuOpen()).toBe(false);
+    const hamburgerBtn = Array.from(fixture.nativeElement.querySelectorAll('button')).find((btn) =>
+      (btn as HTMLElement).getAttribute('aria-label')?.includes('Abrir menu')
+    ) as HTMLButtonElement;
+
+    hamburgerBtn.click();
+    fixture.detectChanges();
+
+    expect(component.isMobileMenuOpen()).toBe(true);
   });
 });
