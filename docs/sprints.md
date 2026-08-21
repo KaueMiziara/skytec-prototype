@@ -75,7 +75,7 @@ Implement the high-conversion, utilitarian B2B landing page using copy and desig
 - [x] **2.6 Institutional Snippet**
   - Create `src/app/features/home/components/institutional-snippet/institutional-snippet.component.ts`.
   - Concise company intro paragraph with link to the full "Sobre Nós" page.
-- [ ] **2.7 Home View Assembly**
+- [x] **2.7 Home View Assembly**
   - Assemble all sub-components into `src/app/features/home/home.component.ts`.
 
 ---
