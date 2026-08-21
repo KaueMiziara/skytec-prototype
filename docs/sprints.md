@@ -124,7 +124,7 @@ Construct the technical, anti-vibe product page with buy box, specifications tab
 - [x] **5.1 Buy Box & Gallery Component**
   - Create `src/app/features/catalog/pages/product-detail/components/pdp-gallery/pdp-gallery.component.ts` over `#f5f5f7` background.
   - Create `src/app/features/catalog/pages/product-detail/components/pdp-buy-box/pdp-buy-box.component.ts` with H1, SKU, prominent Price, quantity selector, and Action Blue "Add to Cart" button.
-- [ ] **5.2 Technical Description & Differentials**
+- [x] **5.2 Technical Description & Differentials**
   - Structured bullet points using clean SVG icons (strictly no decorative emojis).
 - [ ] **5.3 Specifications Table Component**
   - Create `src/app/features/catalog/pages/product-detail/components/pdp-specs-table/pdp-specs-table.component.ts`.
