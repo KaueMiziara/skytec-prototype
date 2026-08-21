@@ -19,7 +19,7 @@ Establish the data contracts, state services, and foundational routing configura
 - [x] **0.3 Cart State Service**
   - Create `src/app/core/services/cart.service.ts` using Signals (`items()`, `totalCount()`, `subtotal()`).
   - Implement methods: `addItem()`, `removeItem()`, `updateQuantity()`, `clearCart()`, `generateWhatsAppLink()`.
-- [ ] **0.4 Standalone App Routing Structure**
+- [x] **0.4 Standalone App Routing Structure**
   - Configure `src/app/app.routes.ts` with lazy-loaded route declarations for all features (`/`, `/catalogo`, `/produto/:id`, `/sobre-nos`, `/conta`, `/admin`).
 
 ---
