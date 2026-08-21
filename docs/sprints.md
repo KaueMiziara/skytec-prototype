@@ -84,7 +84,7 @@ Implement the high-conversion, utilitarian B2B landing page using copy and desig
 
 Build the single-column, content-dense institutional storytelling page adhering to prose constraints.
 
-- [ ] **3.1 Institutional Layout & Container**
+- [x] **3.1 Institutional Layout & Container**
   - Create `src/app/features/about/about.component.ts`.
   - Apply `max-w-prose mx-auto` container with high-contrast typography.
 - [ ] **3.2 Content Blocks Implementation**
