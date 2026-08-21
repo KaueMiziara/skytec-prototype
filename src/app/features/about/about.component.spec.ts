@@ -41,12 +41,12 @@ describe('AboutComponent', () => {
     expect(heading.textContent).toContain('Sobre a SKYTEC');
   });
 
-  it('should constrain the content area within a max-w-prose container', () => {
-    const proseContainer = fixture.nativeElement.querySelector('section.max-w-prose');
-    expect(proseContainer).toBeTruthy();
+  it('should render content area container', () => {
+    const contentSection = fixture.nativeElement.querySelector('section[aria-label="Conteúdo Institucional"]');
+    expect(contentSection).toBeTruthy();
   });
 
-  it('should render Block 1: Sua Jornada na Costura Começa Aqui', () => {
+  it('should render Block 1: Sua Jornada na Costura Começa Aqui with side-by-side grid', () => {
     const text = fixture.nativeElement.textContent;
     expect(text).toContain('Sua Jornada na Costura Começa Aqui');
     expect(text).toContain('Seja você um profissional experiente ou iniciante');
@@ -71,10 +71,14 @@ describe('AboutComponent', () => {
     expect(text).toContain('linhas em diversas espessuras, botões, zíperes e elásticos');
   });
 
-  it('should render Block 4: Por que escolher a SKYTEC with WhatsApp CTA link', () => {
+  it('should render Block 4: Por que escolher a SKYTEC with expanded black box and WhatsApp CTA link', () => {
     const text = fixture.nativeElement.textContent;
     expect(text).toContain('Por que escolher a SKYTEC?');
     expect(text).toContain('Trabalhamos para ser parceiros de longo prazo da sua empresa');
+    expect(text).toContain('Atendimento Consultivo');
+    expect(text).toContain('Logística Integrada');
+    expect(text).toContain('Garantia & Reposição');
+    expect(text).toContain('Faturamento Flexível');
 
     const whatsappCta = fixture.nativeElement.querySelector('a[href*="wa.me"]') as HTMLAnchorElement;
     expect(whatsappCta).toBeTruthy();
