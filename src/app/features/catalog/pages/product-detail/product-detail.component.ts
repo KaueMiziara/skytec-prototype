@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Product } from '../../../../core/models/product.model';
 import { CartService } from '../../../../core/services/cart.service';
@@ -129,6 +129,15 @@ export class ProductDetailComponent {
 
   private readonly productService = inject(ProductService);
   private readonly cartService = inject(CartService);
+
+  constructor() {
+    effect(() => {
+      this.id();
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    });
+  }
 
   protected readonly product = computed<Product | undefined>(() => {
     const currentId = this.id();
