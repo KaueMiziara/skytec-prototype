@@ -7,6 +7,57 @@
   --color-dark-surface: #101010;
 }
 
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #c7c7cc #f5f5f7;
+}
+
 body {
   background-color: var(--color-base-bg);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f5f7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c7c7cc;
+  border-radius: 4px;
+  border: 2px solid #f5f5f7;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8e8e93;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #077fbd;
+}
+
+.dark-scrollbar,
+.bg-\[\#101010\] {
+  scrollbar-width: thin;
+  scrollbar-color: #333333 #101010;
+}
+
+.dark-scrollbar::-webkit-scrollbar-track,
+.bg-\[\#101010\]::-webkit-scrollbar-track {
+  background: #101010;
+}
+
+.dark-scrollbar::-webkit-scrollbar-thumb,
+.bg-\[\#101010\]::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 4px;
+  border: 2px solid #101010;
+}
+
+.dark-scrollbar::-webkit-scrollbar-thumb:hover,
+.bg-\[\#101010\]::-webkit-scrollbar-thumb:hover {
+  background: #444444;
 }
