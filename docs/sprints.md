@@ -146,7 +146,7 @@ Build the minimalist, distraction-free account access interface.
   - H1: "Minha conta SKYTEC" with toggle tabs: "Entrar" and "Cadastrar".
 - [x] **6.2 Login Reactive Form**
   - Email and password inputs with strict validation and error states.
-- [ ] **6.3 Register Reactive Form**
+- [x] **6.3 Register Reactive Form**
   - Name, CNPJ/CPF, Email, Phone/WhatsApp, and password fields.
 - [ ] **6.4 Mock Auth State Flow**
   - Connect form submission to `AuthService` to set mock user session and redirect.

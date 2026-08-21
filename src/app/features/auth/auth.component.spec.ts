@@ -116,6 +116,14 @@ describe('AuthComponent', () => {
     expect(loginForm).toBeTruthy();
   });
 
+  it('should render register form inside register panel when activeTab is register', () => {
+    component.setTab('register');
+    fixture.detectChanges();
+
+    const registerForm = fixture.nativeElement.querySelector('app-register-form');
+    expect(registerForm).toBeTruthy();
+  });
+
   it('should switch to register tab when login form emits switchToRegister', () => {
     const loginFormComponent = fixture.debugElement.nativeElement.querySelector('app-login-form');
     expect(loginFormComponent).toBeTruthy();
@@ -124,6 +132,16 @@ describe('AuthComponent', () => {
     fixture.detectChanges();
 
     expect(component.activeTab()).toBe('register');
+  });
+
+  it('should switch to login tab when register form emits switchToLogin', () => {
+    component.setTab('register');
+    fixture.detectChanges();
+
+    component.setTab('login');
+    fixture.detectChanges();
+
+    expect(component.activeTab()).toBe('login');
   });
 
   it('should respond to route tab input parameter', () => {

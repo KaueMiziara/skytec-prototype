@@ -6,14 +6,15 @@ import {
   signal
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LoginCredentials } from '../../core/models/user.model';
+import { LoginCredentials, RegisterData } from '../../core/models/user.model';
 import { LoginFormComponent } from './components/login-form/login-form.component';
+import { RegisterFormComponent } from './components/register-form/register-form.component';
 
 export type AuthTab = 'login' | 'register';
 
 @Component({
   selector: 'app-auth',
-  imports: [RouterLink, LoginFormComponent],
+  imports: [RouterLink, LoginFormComponent, RegisterFormComponent],
   template: `
     <main class="min-h-screen bg-[#f5f5f7] text-neutral-900 pb-16 sm:pb-24">
       <nav aria-label="Navegação Estrutural" class="bg-white border-b border-neutral-200">
@@ -125,10 +126,12 @@ export type AuthTab = 'login' | 'register';
               tabindex="0"
               class="focus:outline-none"
             >
-              <div class="text-center py-6 text-neutral-600 text-sm">
-                <p class="font-medium text-neutral-900 mb-1">Cadastro de nova confecção</p>
-                <p class="text-xs text-neutral-500">Preencha os dados da sua empresa.</p>
-              </div>
+              <app-register-form
+                [loading]="isLoading()"
+                [errorMessage]="authError()"
+                (registerSubmit)="handleRegister($event)"
+                (switchToLogin)="setTab('login')"
+              />
             </div>
           }
         </div>
@@ -181,6 +184,10 @@ export class AuthComponent {
   }
 
   handleLogin(credentials: LoginCredentials): void {
+    this.authError.set(null);
+  }
+
+  handleRegister(data: RegisterData): void {
     this.authError.set(null);
   }
 
