@@ -102,7 +102,7 @@ Build the reactive B2B catalog with zero-latency instant filtering and search.
 - [x] **4.1 Reusable Product Card Component**
   - Create `src/app/shared/ui/product-card/product-card.component.ts`.
   - White card surface (`#FFFFFF`), product image, bold H3 title, SKU badge, large price typography, and full-width Action Blue "Add to Cart" button.
-- [ ] **4.2 Catalog Filter Sidebar (Desktop & Mobile Drawer)**
+- [x] **4.2 Catalog Filter Sidebar (Desktop & Mobile Drawer)**
   - Create `src/app/features/catalog/components/catalog-filters/catalog-filters.component.ts`.
   - Checkbox groups for Brands and Categories/Stitch Types.
   - Reactive price range slider (min/max bounds computed from data).
