@@ -54,7 +54,7 @@ Construct reusable dumb UI components and the persistent application frame (Head
 
 Implement the high-conversion, utilitarian B2B landing page using copy and design specs.
 
-- [ ] **2.1 Hero Section Component**
+- [x] **2.1 Hero Section Component**
   - Create `src/app/features/home/components/hero/hero.component.ts`.
   - Implement official copy: H1, H2, and clean industrial imagery/background overlay.
   - Primary CTA directing to catalog.
