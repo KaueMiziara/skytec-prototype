@@ -62,7 +62,7 @@ Implement the high-conversion, utilitarian B2B landing page using copy and desig
   - Create `src/app/features/home/components/flagship-banner/flagship-banner.component.ts`.
   - Implement Tag ("Referência em máquinas de costura no Brasil"), H3, supporting copy, and cut-out product image.
   - Direct CTA button: "CONSULTAR UM VENDEDOR" (WhatsApp link).
-- [ ] **2.3 Partner Brands Carousel**
+- [x] **2.3 Partner Brands Carousel**
   - Create `src/app/features/home/components/brand-carousel/brand-carousel.component.ts`.
   - Horizontal quick-filter bar featuring Jack, Sun Special, Siruba, etc.
   - Route navigation to Catalog filtered by clicked brand.

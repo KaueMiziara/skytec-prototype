@@ -32,4 +32,9 @@ describe('HomeComponent', () => {
     const bannerElement = fixture.nativeElement.querySelector('app-flagship-banner');
     expect(bannerElement).toBeTruthy();
   });
+
+  it('should render app-brand-carousel component', () => {
+    const carouselElement = fixture.nativeElement.querySelector('app-brand-carousel');
+    expect(carouselElement).toBeTruthy();
+  });
 });
