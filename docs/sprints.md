@@ -41,7 +41,7 @@ Construct reusable dumb UI components and the persistent application frame (Head
   - Implement hover-triggered multi-column CSS grid dropdown inside Header.
   - Category listings (Reta, Overlock, Galoneira, etc.) without endless vertical scrolling.
   - Mobile responsive hamburger navigation drawer.
-- [ ] **1.4 Global Footer**
+- [x] **1.4 Global Footer**
   - Create `src/app/shared/layout/footer/footer.component.ts` with `#101010` background.
   - Multi-column grid: Company details, CNPJ, contact info, security badges, and quick links.
   - Bottom bar with exact attribution: `Created by: <Your Name> — ⟨ Quantum Computing | † | Software Engineering ⟩`.
