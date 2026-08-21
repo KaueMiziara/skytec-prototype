@@ -104,13 +104,45 @@ describe('CartService', () => {
     expect(service.isDrawerOpen()).toBe(true);
   });
 
-  it('should generate pre-filled WhatsApp link with cart payload', () => {
-    service.addItem(mockProduct1, 2);
+  it('should generate pre-filled WhatsApp link with empty message when cart is empty', () => {
     const link = service.generateWhatsAppLink('5511988887777');
-
     expect(link).toContain('https://wa.me/5511988887777?text=');
-    expect(decodeURIComponent(link)).toContain('SKU-001');
-    expect(decodeURIComponent(link)).toContain('Máquina Reta Teste 1');
-    expect(decodeURIComponent(link)).toContain('Qtd: 2');
+    expect(decodeURIComponent(link)).toContain('Olá! Gostaria de falar com um consultor da SKYTEC Máquinas.');
+  });
+
+  it('should generate pre-filled WhatsApp link with full cart payload and customer data', () => {
+    service.addItem(mockProduct1, 2);
+    service.addItem(mockProduct2, 1);
+    const link = service.generateWhatsAppLink('5511988887777', {
+      name: 'Confecções Silva Ltda',
+      cnpjCpf: '12.345.678/0001-90'
+    });
+
+    const decoded = decodeURIComponent(link);
+    expect(link).toContain('https://wa.me/5511988887777?text=');
+    expect(decoded).toContain('SOLICITAÇÃO DE COTAÇÃO B2B — SKYTEC MÁQUINAS');
+    expect(decoded).toContain('Confecções Silva Ltda');
+    expect(decoded).toContain('12.345.678/0001-90');
+    expect(decoded).toContain('SKU-001');
+    expect(decoded).toContain('Máquina Reta Teste 1');
+    expect(decoded).toContain('Qtd: 2');
+    expect(decoded).toContain('SKU-002');
+    expect(decoded).toContain('VALOR TOTAL ESTIMADO');
+    expect(decoded).toContain('10.500,00');
+  });
+
+  it('should generate single product WhatsApp quote link', () => {
+    const link = service.generateProductWhatsAppLink(mockProduct1, 3, '5511999999999', {
+      name: 'Ateliê Central'
+    });
+
+    const decoded = decodeURIComponent(link);
+    expect(link).toContain('https://wa.me/5511999999999?text=');
+    expect(decoded).toContain('CONSULTA TÉCNICA / COTAÇÃO — SKYTEC MÁQUINAS');
+    expect(decoded).toContain('Ateliê Central');
+    expect(decoded).toContain('SKU-001');
+    expect(decoded).toContain('Máquina Reta Teste 1');
+    expect(decoded).toContain('3');
+    expect(decoded).toContain('9.000,00');
   });
 });

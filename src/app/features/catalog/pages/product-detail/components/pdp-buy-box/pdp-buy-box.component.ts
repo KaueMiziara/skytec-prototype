@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, output, signal } from '@angular/core';
+import { AuthService } from '../../../../../../core/services/auth.service';
+import { CartService } from '../../../../../../core/services/cart.service';
 import { Product } from '../../../../../../core/models/product.model';
 
 @Component({
@@ -188,6 +190,9 @@ import { Product } from '../../../../../../core/models/product.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PdpBuyBoxComponent {
+  private readonly cartService = inject(CartService);
+  private readonly authService = inject(AuthService);
+
   readonly product = input.required<Product>();
   readonly addToCart = output<{ product: Product; quantity: number }>();
 
@@ -209,14 +214,13 @@ export class PdpBuyBoxComponent {
   });
 
   protected readonly whatsAppLink = computed(() => {
-    const p = this.product();
-    const q = this.quantity();
-    const total = (p.price * q).toLocaleString('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    });
-    const message = `Olá! Gostaria de uma cotação para o produto:\n- [${p.sku}] ${p.name}\n- Quantidade: ${q}\n- Valor Estimado: ${total}\n\nPodem me enviar mais detalhes de faturamento?`;
-    return `https://wa.me/5511999999999?text=${encodeURIComponent(message)}`;
+    const user = this.authService.currentUser();
+    return this.cartService.generateProductWhatsAppLink(
+      this.product(),
+      this.quantity(),
+      '5511999999999',
+      user ? { name: user.name, cnpjCpf: user.cnpjCpf } : undefined
+    );
   });
 
   incrementQuantity(): void {

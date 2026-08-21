@@ -178,7 +178,7 @@ Complete the checkout flow, lead generation, and accessibility verification.
 - [x] **8.1 Slide-over Cart Drawer**
   - Create `src/app/shared/layout/cart-drawer/cart-drawer.component.ts`.
   - Item list, quantity increment/decrement, subtotal calculation, and remove action.
-- [ ] **8.2 WhatsApp B2B Quote Integration**
+- [x] **8.2 WhatsApp B2B Quote Integration**
   - Format cart contents into a pre-filled WhatsApp message payload (SKUs, quantities, estimated total).
   - "Finalizar Orçamento via WhatsApp" CTA trigger.
 - [ ] **8.3 Accessibility (a11y) & WCAG AA Audit**

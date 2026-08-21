@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
 import { CartService } from '../../../core/services/cart.service';
 
 @Component({
@@ -266,6 +267,15 @@ import { CartService } from '../../../core/services/cart.service';
 
           <div class="p-4 sm:p-6 bg-white border-t border-neutral-200 space-y-4 shrink-0 shadow-lg">
             <div class="space-y-1.5">
+              @if (authService.isAuthenticated()) {
+                <div class="px-3 py-1.5 bg-neutral-100 rounded-lg text-[11px] text-neutral-600 flex items-center justify-between">
+                  <span>Faturamento: <strong class="text-neutral-900">{{ authService.currentUser()?.name }}</strong></span>
+                  @if (authService.currentUser()?.cnpjCpf) {
+                    <span class="font-mono text-neutral-500">{{ authService.currentUser()?.cnpjCpf }}</span>
+                  }
+                </div>
+              }
+
               <div class="flex items-center justify-between text-xs text-neutral-500 font-medium">
                 <span>Itens na Cotação</span>
                 <span class="font-mono">{{ cartService.totalCount() }}</span>
@@ -283,7 +293,7 @@ import { CartService } from '../../../core/services/cart.service';
 
             <div class="space-y-2">
               <a
-                [href]="cartService.generateWhatsAppLink()"
+                [href]="whatsAppQuoteUrl()"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-[#25D366] hover:bg-[#20ba5a] text-white text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]"
@@ -302,7 +312,7 @@ import { CartService } from '../../../core/services/cart.service';
                 >
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>
-                <span>Finalizar Cotação no WhatsApp</span>
+                <span>Finalizar Orçamento via WhatsApp</span>
               </a>
 
               <div class="flex items-center justify-between pt-1">
@@ -335,9 +345,18 @@ import { CartService } from '../../../core/services/cart.service';
 })
 export class CartDrawerComponent {
   readonly cartService = inject(CartService);
+  readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 
   private readonly failedImages = signal<Set<string>>(new Set());
+
+  protected readonly whatsAppQuoteUrl = computed(() => {
+    const user = this.authService.currentUser();
+    return this.cartService.generateWhatsAppLink(
+      '5511999999999',
+      user ? { name: user.name, cnpjCpf: user.cnpjCpf } : undefined
+    );
+  });
 
   protected formatPrice(val: number): string {
     return val.toLocaleString('pt-BR', {

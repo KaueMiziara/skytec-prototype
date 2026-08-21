@@ -2,12 +2,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { CartDrawerComponent } from './cart-drawer.component';
 import { CartService } from '../../../core/services/cart.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { Product } from '../../../core/models/product.model';
 
 describe('CartDrawerComponent', () => {
   let component: CartDrawerComponent;
   let fixture: ComponentFixture<CartDrawerComponent>;
   let cartService: CartService;
+  let authService: AuthService;
   let router: Router;
 
   const mockProduct1: Product = {
@@ -39,10 +41,11 @@ describe('CartDrawerComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CartDrawerComponent],
-      providers: [provideRouter([]), CartService]
+      providers: [provideRouter([]), CartService, AuthService]
     }).compileComponents();
 
     cartService = TestBed.inject(CartService);
+    authService = TestBed.inject(AuthService);
     router = TestBed.inject(Router);
     fixture = TestBed.createComponent(CartDrawerComponent);
     component = fixture.componentInstance;
@@ -179,5 +182,23 @@ describe('CartDrawerComponent', () => {
     document.dispatchEvent(event);
 
     expect(closeSpy).toHaveBeenCalled();
+  });
+
+  it('should render WhatsApp quotation CTA with pre-filled message and user data', () => {
+    authService.login({ email: 'cliente@skytec.com.br', password: '123' });
+    cartService.addItem(mockProduct1, 2);
+    cartService.openDrawer();
+    fixture.detectChanges();
+
+    const ctaLink = fixture.nativeElement.querySelector('a[aria-label="Finalizar orçamento via WhatsApp"]') as HTMLAnchorElement;
+    expect(ctaLink).toBeTruthy();
+    expect(ctaLink.textContent).toContain('Finalizar Orçamento via WhatsApp');
+    expect(ctaLink.href).toContain('wa.me');
+
+    const decodedHref = decodeURIComponent(ctaLink.href);
+    expect(decodedHref).toContain('SKU-001');
+    expect(decodedHref).toContain('SOLICITAÇÃO DE COTAÇÃO B2B');
+    expect(decodedHref).toContain('Confecção Modelo');
+    expect(decodedHref).toContain('12.345.678/0001-90');
   });
 });

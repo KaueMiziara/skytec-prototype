@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PdpBuyBoxComponent } from './pdp-buy-box.component';
 import { Product } from '../../../../../../core/models/product.model';
+import { CartService } from '../../../../../../core/services/cart.service';
+import { AuthService } from '../../../../../../core/services/auth.service';
 
 describe('PdpBuyBoxComponent', () => {
   let component: PdpBuyBoxComponent;
@@ -21,7 +23,8 @@ describe('PdpBuyBoxComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PdpBuyBoxComponent]
+      imports: [PdpBuyBoxComponent],
+      providers: [CartService, AuthService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PdpBuyBoxComponent);
@@ -94,6 +97,7 @@ describe('PdpBuyBoxComponent', () => {
     const link = fixture.nativeElement.querySelector('a[aria-label*="WhatsApp"]') as HTMLAnchorElement;
     expect(link).toBeTruthy();
     expect(link.href).toContain('wa.me');
-    expect(link.href).toContain('TEST-100');
+    expect(decodeURIComponent(link.href)).toContain('TEST-100');
+    expect(decodeURIComponent(link.href)).toContain('CONSULTA TÉCNICA');
   });
 });
