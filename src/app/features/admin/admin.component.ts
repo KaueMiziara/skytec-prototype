@@ -35,7 +35,7 @@ export type AdminTab = 'products' | 'orders' | 'customers' | 'settings';
       <header class="lg:hidden bg-[#101010] text-white px-4 py-3 border-b border-neutral-800 flex items-center justify-between">
         <div class="flex items-center gap-2.5">
           <img
-            src="/assets/LOGO-SKYTEC.avif"
+            src="assets/LOGO-SKYTEC.avif"
             alt="SKYTEC"
             class="h-8 sm:h-9 w-auto object-contain"
           />
@@ -94,7 +94,7 @@ export type AdminTab = 'products' | 'orders' | 'customers' | 'settings';
         <div class="p-4 sm:p-5 border-b border-neutral-800 flex items-center justify-between">
           <div class="flex items-center gap-3">
             <img
-              src="/assets/LOGO-SKYTEC.avif"
+              src="assets/LOGO-SKYTEC.avif"
               alt="SKYTEC"
               class="h-9 sm:h-10 w-auto object-contain"
             />

@@ -12,7 +12,7 @@ describe('CartService', () => {
     brand: 'Jack',
     category: 'Reta',
     price: 3000,
-    images: ['/test1.jpg'],
+    images: ['test1.jpg'],
     shortDescription: 'Desc 1',
     differentials: ['Diff 1'],
     specifications: { Speed: '5000rpm' }
@@ -25,7 +25,7 @@ describe('CartService', () => {
     brand: 'Sun Special',
     category: 'Overlock',
     price: 4500,
-    images: ['/test2.jpg'],
+    images: ['test2.jpg'],
     shortDescription: 'Desc 2',
     differentials: ['Diff 2'],
     specifications: { Speed: '6000rpm' }

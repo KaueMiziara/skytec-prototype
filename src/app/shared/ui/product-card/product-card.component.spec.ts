@@ -14,7 +14,7 @@ describe('ProductCardComponent', () => {
     brand: 'SKYMAK',
     category: 'Reta',
     price: 2500,
-    images: ['/assets/mock/test.jpg'],
+    images: ['assets/mock/test.jpg'],
     shortDescription: 'Descrição teste de máquina industrial.',
     differentials: ['Direct Drive', 'Corte automático'],
     specifications: { 'Tipo': 'Reta' }

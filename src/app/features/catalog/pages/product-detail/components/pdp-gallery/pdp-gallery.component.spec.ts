@@ -6,9 +6,9 @@ describe('PdpGalleryComponent', () => {
   let fixture: ComponentFixture<PdpGalleryComponent>;
 
   const mockImages = [
-    '/assets/mock/test-1.jpg',
-    '/assets/mock/test-2.jpg',
-    '/assets/mock/test-3.jpg'
+    'assets/mock/test-1.jpg',
+    'assets/mock/test-2.jpg',
+    'assets/mock/test-3.jpg'
   ];
 
   beforeEach(async () => {

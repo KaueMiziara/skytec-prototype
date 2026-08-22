@@ -87,7 +87,7 @@ import { CartService } from '../../../../core/services/cart.service';
               <div class="py-8 flex flex-col items-center justify-center text-center">
                 <div class="w-36 h-36 sm:w-44 sm:h-44 rounded-2xl bg-[#101010] border border-neutral-800 p-3 flex items-center justify-center mb-4 shadow-inner overflow-hidden">
                   <img
-                    src="/assets/skymakr8.avif"
+                    src="assets/skymakr8.avif"
                     alt="Equipamento de Alta Performance SKYMAK"
                     class="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
                   />

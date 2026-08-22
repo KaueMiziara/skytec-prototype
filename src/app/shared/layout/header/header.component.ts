@@ -337,7 +337,7 @@ import { MegaMenuComponent } from './mega-menu.component';
               aria-label="SKYTEC - Página Inicial"
             >
               <img
-                src="/assets/LOGO-SKYTEC.avif"
+                src="assets/LOGO-SKYTEC.avif"
                 alt="SKYTEC Máquinas de Costura"
                 class="h-9 w-auto object-contain"
               />

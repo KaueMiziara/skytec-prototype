@@ -142,7 +142,7 @@ import { InputComponent } from '../../../../shared/ui/input/input.component';
                   name="imageUrl"
                   type="text"
                   label="URL da Imagem do Produto"
-                  placeholder="/images/products/skymak-r8.webp ou URL externa"
+                  placeholder="assets/skymakr8.avif ou URL externa"
                   [formControl]="productForm.controls.imageUrl"
                   hint="Caminho relativo da imagem estática ou URL pública."
                 />
@@ -237,7 +237,7 @@ export class AdminProductModalComponent {
     brand: ['SKYMAK', [Validators.required]],
     category: ['Reta', [Validators.required]],
     price: [3000, [Validators.required, Validators.min(1)]],
-    imageUrl: ['/images/products/skymak-r8.webp'],
+    imageUrl: ['assets/skymakr8.avif'],
     shortDescription: ['', [Validators.required, Validators.minLength(5)]],
     differentials: [''],
     isFeatured: [false]
@@ -275,7 +275,7 @@ export class AdminProductModalComponent {
           brand: this.brandOptions()[0] || 'SKYMAK',
           category: this.categoryOptions()[0] || 'Reta',
           price: 3000,
-          imageUrl: '/images/products/skymak-r8.webp',
+          imageUrl: 'assets/skymakr8.avif',
           shortDescription: '',
           differentials: '',
           isFeatured: false
@@ -349,7 +349,7 @@ export class AdminProductModalComponent {
       brand: raw.brand as Brand,
       category: raw.category as Category,
       price: Number(raw.price),
-      images: raw.imageUrl.trim() ? [raw.imageUrl.trim()] : ['/images/products/skymak-r8.webp'],
+      images: raw.imageUrl.trim() ? [raw.imageUrl.trim()] : ['assets/skymakr8.avif'],
       shortDescription: raw.shortDescription.trim(),
       differentials: differentials.length > 0 ? differentials : ['Motor Direct Drive', 'Alta Performance Industrial'],
       specifications: this.product()?.specifications || {

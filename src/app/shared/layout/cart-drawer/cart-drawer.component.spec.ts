@@ -19,7 +19,7 @@ describe('CartDrawerComponent', () => {
     brand: 'SKYMAK',
     category: 'Reta',
     price: 3200,
-    images: ['/img1.jpg'],
+    images: ['img1.jpg'],
     shortDescription: 'Descrição rápida',
     differentials: ['Diferencial 1'],
     specifications: { Velocidade: '5000rpm' }
@@ -32,7 +32,7 @@ describe('CartDrawerComponent', () => {
     brand: 'Jack',
     category: 'Overlock',
     price: 4500,
-    images: ['/img2.jpg'],
+    images: ['img2.jpg'],
     shortDescription: 'Descrição rápida 2',
     differentials: ['Diferencial 2'],
     specifications: { Velocidade: '6000rpm' }

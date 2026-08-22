@@ -51,7 +51,7 @@ describe('ProductService', () => {
       brand: 'Jack',
       category: 'Reta',
       price: 1999,
-      images: ['/test.jpg'],
+      images: ['test.jpg'],
       shortDescription: 'Test description',
       differentials: ['Fast'],
       specifications: { Speed: '5000rpm' }

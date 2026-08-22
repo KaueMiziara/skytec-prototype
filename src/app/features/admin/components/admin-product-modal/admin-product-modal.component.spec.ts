@@ -13,7 +13,7 @@ describe('AdminProductModalComponent', () => {
     brand: 'SKYMAK',
     category: 'Reta',
     price: 4990,
-    images: ['/test.jpg'],
+    images: ['test.jpg'],
     shortDescription: 'Descrição teste de alta qualidade',
     differentials: ['Direct Drive', 'Corte Automático'],
     specifications: { 'Velocidade': '5000 rpm' },
@@ -107,7 +107,7 @@ describe('AdminProductModalComponent', () => {
       brand: 'Jack',
       category: 'Overlock',
       price: 5500,
-      imageUrl: '/images/new.webp',
+      imageUrl: 'assets/new.webp',
       shortDescription: 'Overlock industrial rápida',
       differentials: 'Lubrificação Automática\nMotor Silencioso',
       isFeatured: false

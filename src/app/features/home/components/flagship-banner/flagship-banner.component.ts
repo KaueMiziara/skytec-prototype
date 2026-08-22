@@ -100,7 +100,7 @@ import { ProductService } from '../../../../core/services/product.service';
 
               <div class="w-48 h-48 sm:w-56 sm:h-56 rounded-full bg-white border border-neutral-200 flex items-center justify-center shadow-sm p-4 my-4 overflow-hidden">
                 <img
-                  src="/assets/skymakr8.avif"
+                  src="assets/skymakr8.avif"
                   alt="Máquina de Costura Industrial Reta Eletrônica Direct Drive SKYMAK R8"
                   class="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
                 />

@@ -15,7 +15,7 @@ import { RouterLink } from '@angular/router';
               aria-label="SKYTEC - Página Inicial"
             >
               <img
-                src="/assets/LOGO-SKYTEC.avif"
+                src="assets/LOGO-SKYTEC.avif"
                 alt="SKYTEC Máquinas de Costura"
                 class="h-14 sm:h-16 w-auto object-contain"
               />

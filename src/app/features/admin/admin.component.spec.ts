@@ -175,7 +175,7 @@ describe('AdminComponent', () => {
       brand: 'SKYMAK',
       category: 'Reta',
       price: 3800,
-      images: ['/img.jpg'],
+      images: ['img.jpg'],
       shortDescription: 'Descrição teste',
       differentials: ['D1'],
       specifications: { 'Velocidade': '5000' }

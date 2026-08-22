@@ -15,7 +15,7 @@ describe('PdpRelatedProductsComponent', () => {
       brand: 'Jack',
       category: 'Reta',
       price: 3000,
-      images: ['/assets/mock/prod1.jpg'],
+      images: ['assets/mock/prod1.jpg'],
       shortDescription: 'Desc 1',
       differentials: ['Diff 1'],
       specifications: { 'Tipo': 'Reta' }
@@ -27,7 +27,7 @@ describe('PdpRelatedProductsComponent', () => {
       brand: 'Sun Special',
       category: 'Overlock',
       price: 3500,
-      images: ['/assets/mock/prod2.jpg'],
+      images: ['assets/mock/prod2.jpg'],
       shortDescription: 'Desc 2',
       differentials: ['Diff 2'],
       specifications: { 'Tipo': 'Overlock' }

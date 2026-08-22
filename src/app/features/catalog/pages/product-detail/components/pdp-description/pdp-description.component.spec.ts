@@ -13,7 +13,7 @@ describe('PdpDescriptionComponent', () => {
     brand: 'SKYMAK',
     category: 'Reta',
     price: 2400,
-    images: ['/assets/mock/test.jpg'],
+    images: ['assets/mock/test.jpg'],
     shortDescription: 'Descrição curta de teste para máquina industrial.',
     differentials: [
       'Motor Direct Drive Integrado: Menos ruído e menor consumo de energia.',
