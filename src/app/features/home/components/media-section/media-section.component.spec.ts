@@ -58,5 +58,16 @@ describe('MediaSectionComponent', () => {
     expect(link).toBeTruthy();
     expect(link.getAttribute('href')).toContain('PROD-SKYMAK-R8');
   });
+
+  it('should set isVideoLoading on video switch and clear it on iframe load', () => {
+    const videoButtons = fixture.nativeElement.querySelectorAll('button[role="listitem"]');
+    const secondButton = videoButtons[1] as HTMLButtonElement;
+
+    secondButton.click();
+    expect(component.isVideoLoading()).toBe(true);
+
+    component.onIframeLoaded();
+    expect(component.isVideoLoading()).toBe(false);
+  });
 });
 

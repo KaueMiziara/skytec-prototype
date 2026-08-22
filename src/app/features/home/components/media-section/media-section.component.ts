@@ -48,34 +48,51 @@ export interface MediaItem {
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-          <div class="lg:col-span-8 bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden shadow-2xl">
-            <div class="relative aspect-video bg-neutral-950 flex items-center justify-center border-b border-neutral-800">
+          <div class="lg:col-span-8 bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden shadow-2xl transition-all duration-300">
+            <div class="relative aspect-video bg-neutral-950 flex items-center justify-center border-b border-neutral-800 overflow-hidden">
               @if (activeEmbedUrl(); as embedUrl) {
                 <iframe
-                  class="w-full h-full border-0"
+                  class="w-full h-full border-0 transition-opacity duration-150"
+                  [class]="isVideoLoading() ? 'opacity-0' : 'opacity-100'"
                   [src]="embedUrl"
                   [title]="activeVideo()?.title ?? 'Demonstração Técnica em Vídeo'"
                   loading="lazy"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowfullscreen
+                  (load)="onIframeLoaded()"
                 ></iframe>
               }
+
+              <div
+                class="absolute inset-0 bg-neutral-950 flex flex-col items-center justify-center transition-opacity duration-150 ease-out pointer-events-none"
+                [class]="isVideoLoading() ? 'opacity-100' : 'opacity-0'"
+                aria-hidden="true"
+              >
+                <div class="w-12 h-12 rounded-full bg-[#0573cc]/10 border border-[#0573cc]/30 flex items-center justify-center text-[#0573cc] animate-pulse">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 animate-spin">
+                    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                  </svg>
+                </div>
+                <span class="mt-3 text-[11px] font-mono uppercase tracking-wider text-neutral-400">
+                  Carregando Demonstração...
+                </span>
+              </div>
             </div>
 
-            <div class="p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all duration-200">
               <div class="space-y-1">
                 <div class="flex items-center gap-2">
-                  <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider bg-[#0573cc] text-white">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider bg-[#0573cc] text-white transition-all duration-200">
                     {{ activeVideo()?.category }}
                   </span>
-                  <span class="text-xs font-mono text-neutral-400">
+                  <span class="text-xs font-mono text-neutral-400 transition-all duration-200">
                     {{ activeVideo()?.speed }} &bull; Duração: {{ activeVideo()?.duration }}
                   </span>
                 </div>
-                <h3 class="text-base sm:text-lg font-bold text-white">
+                <h3 class="text-base sm:text-lg font-bold text-white transition-all duration-200">
                   {{ activeVideo()?.title }}
                 </h3>
-                <p class="text-xs text-neutral-400 max-w-xl">
+                <p class="text-xs text-neutral-400 max-w-xl transition-all duration-200">
                   {{ activeVideo()?.description }}
                 </p>
               </div>
@@ -95,18 +112,24 @@ export interface MediaItem {
               <button
                 type="button"
                 (click)="selectVideo(item)"
-                class="w-full text-left p-4 rounded-xl border transition-all duration-150 cursor-pointer flex items-start gap-3.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0573cc]"
-                [class]="activeVideo()?.id === item.id ? 'bg-neutral-900 border-[#0573cc] text-white' : 'bg-neutral-900/60 border-neutral-800 text-neutral-300 hover:bg-neutral-900 hover:border-neutral-700'"
+                class="group w-full text-left p-4 rounded-xl border transition-all duration-200 ease-out cursor-pointer flex items-start gap-3.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0573cc]"
+                [class]="activeVideo()?.id === item.id ? 'bg-neutral-900 border-[#0573cc] text-white ring-1 ring-[#0573cc]/30 translate-x-1 shadow-md' : 'bg-neutral-900/60 border-neutral-800 text-neutral-300 hover:bg-neutral-900 hover:border-neutral-700 hover:translate-x-0.5'"
                 role="listitem"
                 [attr.aria-selected]="activeVideo()?.id === item.id"
               >
-                <div class="w-10 h-10 rounded-lg bg-neutral-950 border border-neutral-800 flex items-center justify-center text-[#0573cc] shrink-0 mt-0.5">
+                <div
+                  class="w-10 h-10 rounded-lg border flex items-center justify-center shrink-0 mt-0.5 transition-all duration-200"
+                  [class]="activeVideo()?.id === item.id ? 'bg-[#0573cc] text-white border-[#0573cc]' : 'bg-neutral-950 text-[#0573cc] border-neutral-800 group-hover:border-neutral-700 group-hover:bg-neutral-900'"
+                >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </div>
 
                 <div class="flex-1 min-w-0 space-y-1">
                   <div class="flex items-center justify-between">
-                    <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-[#0573cc]">
+                    <span
+                      class="text-[10px] font-mono font-bold uppercase tracking-wider transition-colors duration-200"
+                      [class]="activeVideo()?.id === item.id ? 'text-[#0573cc]' : 'text-neutral-400 group-hover:text-[#0573cc]'"
+                    >
                       {{ item.category }}
                     </span>
                     <span class="text-[11px] font-mono text-neutral-500">
@@ -114,11 +137,14 @@ export interface MediaItem {
                     </span>
                   </div>
 
-                  <h4 class="text-xs sm:text-sm font-bold text-white truncate">
+                  <h4
+                    class="text-xs sm:text-sm font-bold transition-colors duration-200 truncate"
+                    [class]="activeVideo()?.id === item.id ? 'text-white' : 'text-neutral-200 group-hover:text-white'"
+                  >
                     {{ item.title }}
                   </h4>
 
-                  <p class="text-[11px] text-neutral-400 line-clamp-1">
+                  <p class="text-[11px] text-neutral-400 line-clamp-1 transition-colors duration-200">
                     {{ item.description }}
                   </p>
                 </div>
@@ -169,6 +195,7 @@ export class MediaSectionComponent {
   ];
 
   readonly activeVideo = signal<MediaItem | null>(this.mediaList[0]);
+  readonly isVideoLoading = signal(false);
 
   readonly activeEmbedUrl = computed<SafeResourceUrl | null>(() => {
     const current = this.activeVideo();
@@ -183,7 +210,15 @@ export class MediaSectionComponent {
   });
 
   selectVideo(item: MediaItem): void {
+    if (this.activeVideo()?.id === item.id) {
+      return;
+    }
+    this.isVideoLoading.set(true);
     this.activeVideo.set(item);
+  }
+
+  onIframeLoaded(): void {
+    this.isVideoLoading.set(false);
   }
 
   private extractYouTubeId(url: string): string {
