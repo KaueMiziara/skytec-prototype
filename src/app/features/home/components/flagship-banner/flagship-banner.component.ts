@@ -98,19 +98,12 @@ import { ProductService } from '../../../../core/services/product.service';
                 <span>SKU: R8-SKYMAK</span>
               </div>
 
-              <div class="w-48 h-48 sm:w-56 sm:h-56 rounded-full bg-white border border-neutral-200 flex items-center justify-center shadow-sm p-6 my-4">
-                <div class="flex flex-col items-center justify-center text-[#101010]">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-24 h-24 text-[#0573cc]" aria-hidden="true">
-                    <rect x="2" y="6" width="20" height="12" rx="2" />
-                    <path d="M6 12h.01" />
-                    <path d="M10 12h.01" />
-                    <path d="M14 12h.01" />
-                    <path d="M18 12h.01" />
-                    <path d="M12 2v4" />
-                    <path d="M12 18v4" />
-                  </svg>
-                  <span class="text-xs font-black tracking-tighter uppercase text-[#101010] mt-2">SKYMAK DIRECT DRIVE</span>
-                </div>
+              <div class="w-48 h-48 sm:w-56 sm:h-56 rounded-full bg-white border border-neutral-200 flex items-center justify-center shadow-sm p-4 my-4 overflow-hidden">
+                <img
+                  src="/assets/skymakr8.avif"
+                  alt="Máquina de Costura Industrial Reta Eletrônica Direct Drive SKYMAK R8"
+                  class="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
+                />
               </div>
 
               <div class="space-y-1 mt-2">

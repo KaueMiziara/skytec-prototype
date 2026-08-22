@@ -40,33 +40,14 @@ import { MegaMenuComponent } from './mega-menu.component';
           <a
             routerLink="/"
             (click)="closeAllMenus()"
-            class="flex items-center gap-2.5 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#077fbd] rounded-md p-1"
+            class="flex items-center shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#077fbd] rounded-md p-1"
             aria-label="SKYTEC - Página Inicial"
           >
-            <div class="w-9 h-9 rounded-lg bg-[#0573cc] flex items-center justify-center text-white shadow-sm font-black text-xl tracking-tighter">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="w-5 h-5"
-                aria-hidden="true"
-              >
-                <path d="M12 2v20" />
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-              </svg>
-            </div>
-            <div class="flex flex-col">
-              <span class="text-xl sm:text-2xl font-black tracking-tight leading-none text-white">
-                SKY<span class="text-[#0573cc]">TEC</span>
-              </span>
-              <span class="text-[9px] uppercase tracking-widest text-neutral-400 font-semibold leading-tight">
-                Máquinas & Insumos
-              </span>
-            </div>
+            <img
+              src="/assets/LOGO-SKYTEC.avif"
+              alt="SKYTEC Máquinas de Costura"
+              class="h-8 sm:h-9 w-auto object-contain"
+            />
           </a>
 
           <form
@@ -325,12 +306,13 @@ import { MegaMenuComponent } from './mega-menu.component';
           aria-label="Menu de Navegação Principal"
         >
           <div class="p-4 border-b border-neutral-800 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <div class="w-8 h-8 rounded-lg bg-[#0573cc] flex items-center justify-center text-white font-black text-lg">
-                S
-              </div>
-              <span class="text-lg font-black text-white">SKY<span class="text-[#0573cc]">TEC</span></span>
-            </div>
+            <a routerLink="/" (click)="closeMobileMenu()" class="flex items-center" aria-label="SKYTEC - Página Inicial">
+              <img
+                src="/assets/LOGO-SKYTEC.avif"
+                alt="SKYTEC Máquinas de Costura"
+                class="h-7 w-auto object-contain"
+              />
+            </a>
 
             <button
               type="button"

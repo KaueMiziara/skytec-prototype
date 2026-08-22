@@ -34,12 +34,14 @@ export type AdminTab = 'products' | 'orders' | 'customers' | 'settings';
     <div class="min-h-[calc(100vh-4rem)] bg-[#f5f5f7] text-neutral-900 flex flex-col lg:flex-row">
       <header class="lg:hidden bg-[#101010] text-white px-4 py-3 border-b border-neutral-800 flex items-center justify-between">
         <div class="flex items-center gap-2.5">
-          <div class="w-7 h-7 rounded bg-[#0573cc] flex items-center justify-center text-white font-black text-sm">
-            S
-          </div>
+          <img
+            src="/assets/LOGO-SKYTEC.avif"
+            alt="SKYTEC"
+            class="h-6 w-auto object-contain"
+          />
           <div>
-            <span class="text-sm font-black tracking-tight text-white block leading-tight">
-              SKY<span class="text-[#0573cc]">TEC</span> Admin
+            <span class="text-xs font-mono font-bold tracking-wider uppercase text-neutral-300 block leading-tight">
+              Admin
             </span>
             <span class="text-[10px] text-neutral-400 font-medium block leading-tight">
               {{ currentSectionTitle() }}
@@ -91,31 +93,14 @@ export type AdminTab = 'products' | 'orders' | 'customers' | 'settings';
       >
         <div class="p-4 sm:p-5 border-b border-neutral-800 flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-lg bg-[#0573cc] flex items-center justify-center text-white shadow-xs font-black text-base">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="w-4 h-4"
-                aria-hidden="true"
-              >
-                <rect width="18" height="18" x="3" y="3" rx="2" />
-                <path d="M3 9h18" />
-                <path d="M9 21V9" />
-              </svg>
-            </div>
-            <div>
-              <span class="text-sm font-black tracking-tight text-white block leading-tight">
-                SKY<span class="text-[#0573cc]">TEC</span> Admin
-              </span>
-              <span class="text-[10px] text-neutral-400 font-mono tracking-wider uppercase block leading-tight">
-                Painel B2B v1.0
-              </span>
-            </div>
+            <img
+              src="/assets/LOGO-SKYTEC.avif"
+              alt="SKYTEC"
+              class="h-7 w-auto object-contain"
+            />
+            <span class="text-[10px] text-neutral-400 font-mono tracking-wider uppercase block leading-tight px-1.5 py-0.5 rounded bg-neutral-800/80 border border-neutral-700/50">
+              Admin
+            </span>
           </div>
 
           <button
