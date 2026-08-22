@@ -48,7 +48,7 @@ import { MegaMenuComponent } from './mega-menu.component';
             aria-label="SKYTEC - Página Inicial"
           >
             <img
-              src="/assets/LOGO-SKYTEC.avif"
+              src="assets/LOGO-SKYTEC.avif"
               alt="SKYTEC Máquinas de Costura"
               class="h-10 sm:h-12 w-auto object-contain"
             />
@@ -61,7 +61,9 @@ import { MegaMenuComponent } from './mega-menu.component';
             [class.lg:max-w-xl]="isSearchFocused()"
           >
             <div class="relative w-full">
-              <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-400">
+              <div
+                class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-400"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -134,7 +136,9 @@ import { MegaMenuComponent } from './mega-menu.component';
                 class="w-4 h-4"
                 aria-hidden="true"
               >
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                />
               </svg>
               <span>WhatsApp</span>
             </a>
@@ -168,7 +172,11 @@ import { MegaMenuComponent } from './mega-menu.component';
                 }
               </div>
               <span class="hidden sm:inline">
-                {{ authService.isAuthenticated() ? (authService.currentUser()?.name?.split(' ')?.[0] || 'Conta') : 'Conta' }}
+                {{
+                  authService.isAuthenticated()
+                    ? authService.currentUser()?.name?.split(' ')?.[0] || 'Conta'
+                    : 'Conta'
+                }}
               </span>
             </a>
 
@@ -206,7 +214,9 @@ import { MegaMenuComponent } from './mega-menu.component';
           </div>
         </div>
 
-        <nav class="hidden lg:flex items-center gap-8 py-2.5 border-t border-neutral-800/80 text-xs font-medium text-neutral-300">
+        <nav
+          class="hidden lg:flex items-center gap-8 py-2.5 border-t border-neutral-800/80 text-xs font-medium text-neutral-300"
+        >
           <button
             type="button"
             (click)="toggleMegaMenu()"
@@ -215,7 +225,20 @@ import { MegaMenuComponent } from './mega-menu.component';
             aria-haspopup="true"
             class="hover:text-white transition-colors py-1 flex items-center gap-2 font-semibold text-white cursor-pointer focus-visible:outline-none focus-visible:text-[#0573cc]"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-4 h-4"
+            >
+              <line x1="4" x2="20" y1="12" y2="12" />
+              <line x1="4" x2="20" y1="6" y2="6" />
+              <line x1="4" x2="20" y1="18" y2="18" />
+            </svg>
             <span>Todas as Máquinas</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -228,7 +251,7 @@ import { MegaMenuComponent } from './mega-menu.component';
               class="w-3.5 h-3.5 transition-transform duration-200"
               [class.rotate-180]="isMegaMenuOpen()"
             >
-              <path d="m6 9 6 6 6-6"/>
+              <path d="m6 9 6 6 6-6" />
             </svg>
           </button>
 
@@ -290,10 +313,7 @@ import { MegaMenuComponent } from './mega-menu.component';
         </nav>
       </div>
 
-      <app-mega-menu
-        [isOpen]="isMegaMenuOpen()"
-        (close)="isMegaMenuOpen.set(false)"
-      />
+      <app-mega-menu [isOpen]="isMegaMenuOpen()" (close)="isMegaMenuOpen.set(false)" />
 
       @if (isMobileMenuOpen()) {
         <div
@@ -310,7 +330,12 @@ import { MegaMenuComponent } from './mega-menu.component';
           aria-label="Menu de Navegação Principal"
         >
           <div class="p-4 border-b border-neutral-800 flex items-center justify-between">
-            <a routerLink="/" (click)="closeMobileMenu()" class="flex items-center" aria-label="SKYTEC - Página Inicial">
+            <a
+              routerLink="/"
+              (click)="closeMobileMenu()"
+              class="flex items-center"
+              aria-label="SKYTEC - Página Inicial"
+            >
               <img
                 src="/assets/LOGO-SKYTEC.avif"
                 alt="SKYTEC Máquinas de Costura"
@@ -324,7 +349,19 @@ import { MegaMenuComponent } from './mega-menu.component';
               class="p-2 text-neutral-400 hover:text-white rounded-lg hover:bg-neutral-800 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#077fbd]"
               aria-label="Fechar menu"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-5 h-5"
+              >
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
             </button>
           </div>
 
@@ -448,7 +485,20 @@ import { MegaMenuComponent } from './mega-menu.component';
               rel="noopener noreferrer"
               class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#25D366] text-white text-xs font-bold uppercase tracking-wider"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-4 h-4"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                />
+              </svg>
               Consultor WhatsApp
             </a>
           </div>
@@ -458,10 +508,10 @@ import { MegaMenuComponent } from './mega-menu.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    'class': 'sticky top-0 z-50 block',
+    class: 'sticky top-0 z-50 block',
     '(window:scroll)': 'onWindowScroll()',
-    '(document:keydown.escape)': 'closeAllMenus()'
-  }
+    '(document:keydown.escape)': 'closeAllMenus()',
+  },
 })
 export class HeaderComponent {
   private readonly router = inject(Router);
@@ -479,7 +529,8 @@ export class HeaderComponent {
   private readonly scrollThreshold = 10;
 
   onWindowScroll(): void {
-    const currentScrollY = typeof window !== 'undefined' ? window.scrollY || document.documentElement.scrollTop || 0 : 0;
+    const currentScrollY =
+      typeof window !== 'undefined' ? window.scrollY || document.documentElement.scrollTop || 0 : 0;
 
     if (currentScrollY <= 60) {
       this.isHeaderHiddenOnMobile.set(false);
