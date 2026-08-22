@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../../../core/services/cart.service';
 
@@ -10,7 +11,7 @@ export interface MediaItem {
   speed: string;
   description: string;
   productId: string;
-  embedUrl: string;
+  videoUrl: string;
 }
 
 @Component({
@@ -48,19 +49,16 @@ export interface MediaItem {
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           <div class="lg:col-span-8 bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden shadow-2xl">
-            <div class="relative aspect-16/9 bg-neutral-950 flex items-center justify-center border-b border-neutral-800">
-              @if (activeVideo()) {
-                <div class="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-neutral-950">
-                  <div class="w-16 h-16 rounded-full bg-[#0573cc]/20 border border-[#0573cc]/40 flex items-center justify-center text-[#0573cc] mb-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                  </div>
-                  <span class="text-xs font-mono uppercase tracking-wider text-neutral-400">Transmissão de Demonstração</span>
-                  <h3 class="text-base sm:text-lg font-bold text-white mt-1">{{ activeVideo()?.title }}</h3>
-                  <p class="text-xs text-neutral-500 mt-1 max-w-md">{{ activeVideo()?.description }}</p>
-                  <span class="mt-3 px-3 py-1 bg-neutral-900 border border-neutral-800 rounded text-[11px] font-mono text-emerald-400">
-                    Cadência: {{ activeVideo()?.speed }} &bull; Duração: {{ activeVideo()?.duration }}
-                  </span>
-                </div>
+            <div class="relative aspect-video bg-neutral-950 flex items-center justify-center border-b border-neutral-800">
+              @if (activeEmbedUrl(); as embedUrl) {
+                <iframe
+                  class="w-full h-full border-0"
+                  [src]="embedUrl"
+                  [title]="activeVideo()?.title ?? 'Demonstração Técnica em Vídeo'"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
               }
             </div>
 
@@ -71,12 +69,15 @@ export interface MediaItem {
                     {{ activeVideo()?.category }}
                   </span>
                   <span class="text-xs font-mono text-neutral-400">
-                    {{ activeVideo()?.speed }}
+                    {{ activeVideo()?.speed }} &bull; Duração: {{ activeVideo()?.duration }}
                   </span>
                 </div>
                 <h3 class="text-base sm:text-lg font-bold text-white">
                   {{ activeVideo()?.title }}
                 </h3>
+                <p class="text-xs text-neutral-400 max-w-xl">
+                  {{ activeVideo()?.description }}
+                </p>
               </div>
 
               <a
@@ -132,6 +133,7 @@ export interface MediaItem {
 })
 export class MediaSectionComponent {
   readonly cartService = inject(CartService);
+  private readonly sanitizer = inject(DomSanitizer);
 
   readonly mediaList: MediaItem[] = [
     {
@@ -142,7 +144,7 @@ export class MediaSectionComponent {
       speed: '5.000 RPM',
       description: 'Demonstração de precisão no arremate inicial/final e eficiência energética do motor Direct Drive.',
       productId: 'PROD-SKYMAK-R8',
-      embedUrl: 'https://www.youtube-nocookie.com/embed/placeholder1'
+      videoUrl: 'https://youtu.be/JA6ocV5kqaE'
     },
     {
       id: 'media-sun-ss65d',
@@ -152,7 +154,7 @@ export class MediaSectionComponent {
       speed: '6.000 RPM',
       description: 'Operação suave sem vibração com lubrificação automática em tecidos elásticos.',
       productId: 'PROD-SUN-SS65D',
-      embedUrl: 'https://www.youtube-nocookie.com/embed/placeholder2'
+      videoUrl: 'https://youtu.be/JA6ocV5kqaE'
     },
     {
       id: 'media-siruba-747k',
@@ -162,13 +164,41 @@ export class MediaSectionComponent {
       speed: '6.500 RPM',
       description: 'Acabamento profissional de alta resistência com controle eletrônico integrado.',
       productId: 'PROD-SIRUBA-747K',
-      embedUrl: 'https://www.youtube-nocookie.com/embed/placeholder3'
+      videoUrl: 'https://youtu.be/JA6ocV5kqaE'
     }
   ];
 
   readonly activeVideo = signal<MediaItem | null>(this.mediaList[0]);
 
+  readonly activeEmbedUrl = computed<SafeResourceUrl | null>(() => {
+    const current = this.activeVideo();
+    if (!current?.videoUrl) {
+      return null;
+    }
+    const videoId = this.extractYouTubeId(current.videoUrl);
+    if (!videoId) {
+      return null;
+    }
+    return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube-nocookie.com/embed/${videoId}`);
+  });
+
   selectVideo(item: MediaItem): void {
     this.activeVideo.set(item);
+  }
+
+  private extractYouTubeId(url: string): string {
+    if (!url) {
+      return '';
+    }
+    const trimmed = url.trim();
+    const regExp = /(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/;
+    const match = trimmed.match(regExp);
+    if (match && match[1]) {
+      return match[1];
+    }
+    if (/^[\w-]{11}$/.test(trimmed)) {
+      return trimmed;
+    }
+    return '';
   }
 }

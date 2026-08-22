@@ -30,6 +30,13 @@ describe('MediaSectionComponent', () => {
     expect(videoButtons.length).toBe(component.mediaList.length);
   });
 
+  it('should render YouTube iframe with sanitized embed URL', () => {
+    const iframe = fixture.nativeElement.querySelector('iframe');
+    expect(iframe).toBeTruthy();
+    expect(iframe.getAttribute('src')).toContain('https://www.youtube-nocookie.com/embed/JA6ocV5kqaE');
+    expect(iframe.getAttribute('title')).toBe(component.activeVideo()?.title);
+  });
+
   it('should change active video when a video button is clicked', () => {
     const videoButtons = fixture.nativeElement.querySelectorAll('button[role="listitem"]');
     const secondButton = videoButtons[1] as HTMLButtonElement;
@@ -38,6 +45,9 @@ describe('MediaSectionComponent', () => {
     fixture.detectChanges();
 
     expect(component.activeVideo()?.id).toBe(component.mediaList[1].id);
+    const iframe = fixture.nativeElement.querySelector('iframe');
+    expect(iframe).toBeTruthy();
+    expect(iframe.getAttribute('src')).toContain('https://www.youtube-nocookie.com/embed/JA6ocV5kqaE');
   });
 
   it('should render link to featured machine details', () => {
@@ -49,3 +59,4 @@ describe('MediaSectionComponent', () => {
     expect(link.getAttribute('href')).toContain('PROD-SKYMAK-R8');
   });
 });
+
