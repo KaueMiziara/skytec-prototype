@@ -10,7 +10,7 @@ describe('MediaSectionComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MediaSectionComponent],
-      providers: [provideRouter([]), CartService]
+      providers: [provideRouter([]), CartService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MediaSectionComponent);
@@ -33,7 +33,9 @@ describe('MediaSectionComponent', () => {
   it('should render YouTube iframe with sanitized embed URL', () => {
     const iframe = fixture.nativeElement.querySelector('iframe');
     expect(iframe).toBeTruthy();
-    expect(iframe.getAttribute('src')).toContain('https://www.youtube-nocookie.com/embed/JA6ocV5kqaE');
+    expect(iframe.getAttribute('src')).toContain(
+      'https://www.youtube-nocookie.com/embed/IPDWeVxJ4og',
+    );
     expect(iframe.getAttribute('title')).toBe(component.activeVideo()?.title);
   });
 
@@ -47,12 +49,14 @@ describe('MediaSectionComponent', () => {
     expect(component.activeVideo()?.id).toBe(component.mediaList[1].id);
     const iframe = fixture.nativeElement.querySelector('iframe');
     expect(iframe).toBeTruthy();
-    expect(iframe.getAttribute('src')).toContain('https://www.youtube-nocookie.com/embed/JA6ocV5kqaE');
+    expect(iframe.getAttribute('src')).toContain(
+      'https://www.youtube-nocookie.com/embed/D0lNM7DTVTQ',
+    );
   });
 
   it('should render link to featured machine details', () => {
     const link = Array.from(fixture.nativeElement.querySelectorAll('a')).find((a) =>
-      (a as HTMLElement).textContent?.includes('Ver Máquina')
+      (a as HTMLElement).textContent?.includes('Ver Máquina'),
     ) as HTMLAnchorElement;
 
     expect(link).toBeTruthy();
@@ -70,4 +74,3 @@ describe('MediaSectionComponent', () => {
     expect(component.isVideoLoading()).toBe(false);
   });
 });
-
