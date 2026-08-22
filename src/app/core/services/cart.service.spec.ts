@@ -120,7 +120,7 @@ describe('CartService', () => {
 
     const decoded = decodeURIComponent(link);
     expect(link).toContain('https://wa.me/5511988887777?text=');
-    expect(decoded).toContain('SOLICITAÇÃO DE COTAÇÃO B2B — SKYTEC MÁQUINAS');
+    expect(decoded).toContain('SOLICITAÇÃO DE COTAÇÃO B2B - SKYTEC MÁQUINAS');
     expect(decoded).toContain('Confecções Silva Ltda');
     expect(decoded).toContain('12.345.678/0001-90');
     expect(decoded).toContain('SKU-001');
@@ -138,7 +138,7 @@ describe('CartService', () => {
 
     const decoded = decodeURIComponent(link);
     expect(link).toContain('https://wa.me/5511999999999?text=');
-    expect(decoded).toContain('CONSULTA TÉCNICA / COTAÇÃO — SKYTEC MÁQUINAS');
+    expect(decoded).toContain('CONSULTA TÉCNICA / COTAÇÃO - SKYTEC MÁQUINAS');
     expect(decoded).toContain('Ateliê Central');
     expect(decoded).toContain('SKU-001');
     expect(decoded).toContain('Máquina Reta Teste 1');

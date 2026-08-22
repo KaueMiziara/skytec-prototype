@@ -82,7 +82,7 @@ export class CartService {
     }
 
     const lines: string[] = [
-      '*SOLICITAÇÃO DE COTAÇÃO B2B — SKYTEC MÁQUINAS*',
+      '*SOLICITAÇÃO DE COTAÇÃO B2B - SKYTEC MÁQUINAS*',
       '----------------------------------------'
     ];
 
@@ -141,7 +141,7 @@ export class CartService {
     });
 
     const lines: string[] = [
-      '*CONSULTA TÉCNICA / COTAÇÃO — SKYTEC MÁQUINAS*',
+      '*CONSULTA TÉCNICA / COTAÇÃO - SKYTEC MÁQUINAS*',
       '----------------------------------------'
     ];
 

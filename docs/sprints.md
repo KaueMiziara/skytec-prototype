@@ -1,4 +1,4 @@
-# SkyTec Prototype — Development Sprints Roadmap
+# SkyTec Prototype - Development Sprints Roadmap
 
 This roadmap outlines the atomic, step-by-step implementation plan for the **SkyTec** B2B e-commerce interactive prototype. It follows Angular 21 best practices (standalone components, Signals, native control flow, `OnPush` change detection), Tailwind CSS v4 design tokens, and strict zero-backend in-memory data flow.
 
@@ -44,7 +44,7 @@ Construct reusable dumb UI components and the persistent application frame (Head
 - [x] **1.4 Global Footer**
   - Create `src/app/shared/layout/footer/footer.component.ts` with `#101010` background.
   - Multi-column grid: Company details, CNPJ, contact info, security badges, and quick links.
-  - Bottom bar with exact attribution: `Created by: <Your Name> — ⟨ Quantum Computing | † | Software Engineering ⟩`.
+  - Bottom bar with exact attribution: `Created by: <Your Name> - ⟨ Quantum Computing | † | Software Engineering ⟩`.
 - [x] **1.5 Shell Integration**
   - Integrate Header, `<router-outlet />`, and Footer into `src/app/app.html`.
 

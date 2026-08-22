@@ -288,7 +288,7 @@ export type OrderSortDirection = 'asc' | 'desc';
               <div>
                 <span class="text-[10px] uppercase font-mono text-[#0573cc] font-bold block">Detalhes da Cotação</span>
                 <h3 id="modal-order-details-title" class="text-lg font-black text-white leading-tight">
-                  {{ selectedOrderForDetails()?.quoteNumber }} — {{ selectedOrderForDetails()?.clientName }}
+                  {{ selectedOrderForDetails()?.quoteNumber }} - {{ selectedOrderForDetails()?.clientName }}
                 </h3>
               </div>
               <button

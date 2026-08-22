@@ -73,7 +73,7 @@ import { CartService } from '../../core/services/cart.service';
                   </svg>
                 </div>
                 <span class="text-xs font-mono font-bold tracking-wider uppercase text-neutral-300">Infraestrutura & Distribuição</span>
-                <span class="text-[11px] text-neutral-400 mt-1">Estoque Centralizado no Bom Retiro - São Paulo/SP</span>
+                <span class="text-[11px] text-neutral-400 mt-1">Estoque Centralizado em São Mateus - São Paulo/SP</span>
               </div>
             </div>
           </div>
@@ -226,7 +226,7 @@ import { CartService } from '../../core/services/cart.service';
           <div class="pt-6 border-t border-neutral-800 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
             <div class="text-xs text-neutral-400 font-mono flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-              <span>SEDE: BOM RETIRO / SP • ATENDIMENTO B2B ATIVO</span>
+              <span>SEDE: SÃO MATEUS / SP • ATENDIMENTO B2B ATIVO</span>
             </div>
 
             <a

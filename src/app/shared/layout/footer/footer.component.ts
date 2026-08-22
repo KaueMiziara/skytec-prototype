@@ -29,7 +29,7 @@ import { RouterLink } from '@angular/router';
             <div class="space-y-1 text-xs text-neutral-500">
               <p>CNPJ: 12.345.678/0001-90</p>
               <p>Inscrição Estadual: 123.456.789.110</p>
-              <p>Bom Retiro — São Paulo / SP</p>
+              <p>São Mateus - São Paulo / SP</p>
             </div>
           </div>
 

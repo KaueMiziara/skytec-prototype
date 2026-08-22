@@ -143,7 +143,7 @@ describe('AdminOrdersTableComponent', () => {
     expect(component.selectedOrderForDetails()?.id).toBe('ord-1');
     const dialog = fixture.nativeElement.querySelector('[role="dialog"]');
     expect(dialog).toBeTruthy();
-    expect(dialog.textContent).toContain('COT-001 — Confecção Alfa');
+    expect(dialog.textContent).toContain('COT-001 - Confecção Alfa');
     expect(dialog.textContent).toContain('Máquina Reta');
 
     component.closeDetails();

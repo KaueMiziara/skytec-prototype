@@ -29,7 +29,7 @@
 
 - **Footer:** Background `#101010`.
 - _Layout:_ Multi-column grid containing company details, CNPJ, contact info, security badges, and quick links.
-- _Bottom Bar:_ Centered copyright and signature: `Created by: <Your Name> — ⟨ Quantum Computing | † | Software Engineering ⟩`.
+- _Bottom Bar:_ Centered copyright and signature: `Created by: <Your Name> - ⟨ Quantum Computing | † | Software Engineering ⟩`.
 
 **Home Page**
 

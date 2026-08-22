@@ -107,7 +107,7 @@ import { CartService } from '../../../../core/services/cart.service';
               </ul>
 
               <div class="pt-4 border-t border-neutral-800 text-[11px] text-neutral-400 font-mono flex items-center justify-between">
-                <span>SEDE: BOM RETIRO / SP</span>
+                <span>SEDE: SÃO MATEUS / SP</span>
                 <span class="text-emerald-400">● ATENDIMENTO ATIVO</span>
               </div>
             </div>

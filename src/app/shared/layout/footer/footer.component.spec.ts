@@ -24,7 +24,7 @@ describe('FooterComponent', () => {
   it('should display company CNPJ and legal details', () => {
     const text = fixture.nativeElement.textContent;
     expect(text).toContain('CNPJ: 12.345.678/0001-90');
-    expect(text).toContain('Bom Retiro');
+    expect(text).toContain('São Mateus');
   });
 
   it('should render the required developer signature', () => {
