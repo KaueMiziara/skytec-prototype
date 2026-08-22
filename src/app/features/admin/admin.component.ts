@@ -37,7 +37,7 @@ export type AdminTab = 'products' | 'orders' | 'customers' | 'settings';
           <img
             src="/assets/LOGO-SKYTEC.avif"
             alt="SKYTEC"
-            class="h-6 w-auto object-contain"
+            class="h-8 sm:h-9 w-auto object-contain"
           />
           <div>
             <span class="text-xs font-mono font-bold tracking-wider uppercase text-neutral-300 block leading-tight">
@@ -96,7 +96,7 @@ export type AdminTab = 'products' | 'orders' | 'customers' | 'settings';
             <img
               src="/assets/LOGO-SKYTEC.avif"
               alt="SKYTEC"
-              class="h-7 w-auto object-contain"
+              class="h-9 sm:h-10 w-auto object-contain"
             />
             <span class="text-[10px] text-neutral-400 font-mono tracking-wider uppercase block leading-tight px-1.5 py-0.5 rounded bg-neutral-800/80 border border-neutral-700/50">
               Admin

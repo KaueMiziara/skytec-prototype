@@ -9,7 +9,7 @@ describe('FooterComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FooterComponent],
-      providers: [provideRouter([])]
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FooterComponent);
@@ -29,6 +29,6 @@ describe('FooterComponent', () => {
 
   it('should render the required developer signature', () => {
     const text = fixture.nativeElement.textContent;
-    expect(text).toContain('Created by: Kaue Miziara — ⟨ Quantum Computing | † | Software Engineering ⟩');
+    expect(text).toContain('⟨ Computational Physics | Kaue Miziara | Software Engineering ⟩');
   });
 });

@@ -7,7 +7,7 @@
       "brand": "Jack",
       "category": "Reta",
       "price": 3150.0,
-      "images": ["/assets/mock/jack-a2c.jpg"],
+      "images": ["/assets/skymakr8.avif"],
       "shortDescription": "Máquina reta industrial com corte de linha automático, ideal para alta produtividade.",
       "differentials": [
         "Corte de linha automático",
@@ -26,7 +26,7 @@
       "brand": "Sun Special",
       "category": "Overlock",
       "price": 3600.0,
-      "images": ["/assets/mock/sun-ss65d.jpg"],
+      "images": ["/assets/skymakr8.avif"],
       "shortDescription": "Projetada para oferecer acabamento rápido e limpo em tecidos leves e médios.",
       "differentials": [
         "Motor Direct Drive Integrado: Menos ruído e menor consumo de energia.",
@@ -90,7 +90,7 @@
       "brand": "Siruba",
       "category": "Overlock",
       "price": 4200.0,
-      "images": ["/assets/mock/siruba-747k.jpg"],
+      "images": ["/assets/skymakr8.avif"],
       "shortDescription": "Overlock industrial de alta velocidade para fechamento e acabamento perfeito em malhas e tecidos leves a médios.",
       "differentials": [
         "Motor Direct Drive Silencioso de Alto Torque.",

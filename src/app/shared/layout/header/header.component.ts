@@ -46,7 +46,7 @@ import { MegaMenuComponent } from './mega-menu.component';
             <img
               src="/assets/LOGO-SKYTEC.avif"
               alt="SKYTEC Máquinas de Costura"
-              class="h-8 sm:h-9 w-auto object-contain"
+              class="h-10 sm:h-12 w-auto object-contain"
             />
           </a>
 
@@ -310,7 +310,7 @@ import { MegaMenuComponent } from './mega-menu.component';
               <img
                 src="/assets/LOGO-SKYTEC.avif"
                 alt="SKYTEC Máquinas de Costura"
-                class="h-7 w-auto object-contain"
+                class="h-9 w-auto object-contain"
               />
             </a>
 

@@ -85,16 +85,12 @@ import { CartService } from '../../../../core/services/cart.service';
               </div>
 
               <div class="py-8 flex flex-col items-center justify-center text-center">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#101010] border border-neutral-800 flex items-center justify-center text-[#0573cc] mb-4 shadow-inner">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12" aria-hidden="true">
-                    <rect x="2" y="6" width="20" height="12" rx="2"></rect>
-                    <path d="M6 12h.01"></path>
-                    <path d="M10 12h.01"></path>
-                    <path d="M14 12h.01"></path>
-                    <path d="M18 12h.01"></path>
-                    <path d="M12 2v4"></path>
-                    <path d="M12 18v4"></path>
-                  </svg>
+                <div class="w-36 h-36 sm:w-44 sm:h-44 rounded-2xl bg-[#101010] border border-neutral-800 p-3 flex items-center justify-center mb-4 shadow-inner overflow-hidden">
+                  <img
+                    src="/assets/skymakr8.avif"
+                    alt="Equipamento de Alta Performance SKYMAK"
+                    class="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
                 <h3 class="text-lg font-black text-white tracking-tight">Equipamentos de Alta Performance</h3>
                 <p class="text-xs text-neutral-400 mt-1 max-w-xs leading-relaxed">

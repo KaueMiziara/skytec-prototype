@@ -17,7 +17,7 @@ import { RouterLink } from '@angular/router';
               <img
                 src="/assets/LOGO-SKYTEC.avif"
                 alt="SKYTEC Máquinas de Costura"
-                class="h-8 w-auto object-contain"
+                class="h-14 sm:h-16 w-auto object-contain"
               />
             </a>
 
@@ -224,7 +224,7 @@ import { RouterLink } from '@angular/router';
             &copy; 2026 SKYTEC Máquinas de Costura. Todos os direitos reservados.
           </p>
           <p class="text-xs font-mono text-neutral-400">
-            Created by: Kaue Miziara - ⟨ Computational Physics | &dagger; | Software Engineering ⟩
+            ⟨ Computational Physics | Kaue Miziara | Software Engineering ⟩
           </p>
         </div>
       </div>
