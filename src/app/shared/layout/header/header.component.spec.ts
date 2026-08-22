@@ -83,4 +83,31 @@ describe('HeaderComponent', () => {
 
     expect(component.isMobileMenuOpen()).toBe(true);
   });
+
+  it('should hide header on mobile when scrolling down beyond threshold', () => {
+    Object.defineProperty(window, 'scrollY', { value: 150, writable: true });
+    component.onWindowScroll();
+
+    Object.defineProperty(window, 'scrollY', { value: 200, writable: true });
+    component.onWindowScroll();
+
+    expect(component.isHeaderHiddenOnMobile()).toBe(true);
+  });
+
+  it('should reveal header on mobile when scrolling up', () => {
+    Object.defineProperty(window, 'scrollY', { value: 300, writable: true });
+    component.onWindowScroll();
+
+    Object.defineProperty(window, 'scrollY', { value: 200, writable: true });
+    component.onWindowScroll();
+
+    expect(component.isHeaderHiddenOnMobile()).toBe(false);
+  });
+
+  it('should keep header visible when near the top of the page', () => {
+    Object.defineProperty(window, 'scrollY', { value: 30, writable: true });
+    component.onWindowScroll();
+
+    expect(component.isHeaderHiddenOnMobile()).toBe(false);
+  });
 });

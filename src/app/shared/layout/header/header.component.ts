@@ -9,7 +9,11 @@ import { MegaMenuComponent } from './mega-menu.component';
   selector: 'app-header',
   imports: [RouterLink, MegaMenuComponent],
   template: `
-    <header class="sticky top-0 z-50 bg-[#101010] text-white border-b border-neutral-800 shadow-md">
+    <header
+      class="relative bg-[#101010] text-white border-b border-neutral-800 shadow-md transition-transform duration-300 ease-in-out lg:translate-y-0"
+      [class.max-lg:-translate-y-full]="isHeaderHiddenOnMobile()"
+      [class.max-lg:translate-y-0]="!isHeaderHiddenOnMobile()"
+    >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16 sm:h-20 gap-3 sm:gap-6">
           <button
@@ -454,6 +458,8 @@ import { MegaMenuComponent } from './mega-menu.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
+    'class': 'sticky top-0 z-50 block',
+    '(window:scroll)': 'onWindowScroll()',
     '(document:keydown.escape)': 'closeAllMenus()'
   }
 })
@@ -467,6 +473,32 @@ export class HeaderComponent {
   readonly isSearchFocused = signal<boolean>(false);
   readonly isMegaMenuOpen = signal<boolean>(false);
   readonly isMobileMenuOpen = signal<boolean>(false);
+  readonly isHeaderHiddenOnMobile = signal<boolean>(false);
+
+  private lastScrollY = 0;
+  private readonly scrollThreshold = 10;
+
+  onWindowScroll(): void {
+    const currentScrollY = typeof window !== 'undefined' ? window.scrollY || document.documentElement.scrollTop || 0 : 0;
+
+    if (currentScrollY <= 60) {
+      this.isHeaderHiddenOnMobile.set(false);
+      this.lastScrollY = Math.max(0, currentScrollY);
+      return;
+    }
+
+    if (Math.abs(currentScrollY - this.lastScrollY) < this.scrollThreshold) {
+      return;
+    }
+
+    if (currentScrollY > this.lastScrollY && !this.isMobileMenuOpen()) {
+      this.isHeaderHiddenOnMobile.set(true);
+    } else if (currentScrollY < this.lastScrollY) {
+      this.isHeaderHiddenOnMobile.set(false);
+    }
+
+    this.lastScrollY = Math.max(0, currentScrollY);
+  }
 
   protected handleSearchInput(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -503,5 +535,6 @@ export class HeaderComponent {
   protected closeAllMenus(): void {
     this.isMegaMenuOpen.set(false);
     this.isMobileMenuOpen.set(false);
+    this.isHeaderHiddenOnMobile.set(false);
   }
 }
